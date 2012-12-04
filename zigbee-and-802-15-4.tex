@@ -50,6 +50,11 @@ The contention uses the CSMA/CA protocol.
 Before transmitting, the devices sense the channel for the presence of an ongoing transmission.
 If a transmission is detected, the devices backs off and re-attempts after a random period of time.
 
+There are two mechanism to detect an ongoing transmission.
+Energy detection in which the device simply measures the amount of energy on the channel,
+and carrier detection in which the device looks for the presence of an IEEE 802.15.4 carrier.
+Either one or the other, or even a combination of both, can be used.
+
 \section{MAC handshake}
 
 In a beacon-enabled network, a node that wants to transmit data to the coordinator waits for the CFP if it has a reservation.
@@ -63,3 +68,32 @@ After that, the device sends a ``data request'' message to the coordinator that 
 Then the coordinator sends the data packet to the device which may acknowledge the correct reception.
 
 In a non-beacon network, a device can transmit to the coordinator whenever the channel is sensed empty.
+If a coordinator has data for a device, it waits until the device sends a ``data request'' which must be acknowledged.
+Then the coordinator sends the data to the device, that may acknowledge the correct reception.
+
+\section{MAC problems in multi-hop wireless networks}
+
+There are two well-known problems that recurrently appear in multi-hop wireless networks.
+The first one is the ``hidden node problem'' and is represented in Figure \ref{fig:hidden}.
+Imagine that nodes $A$ and $C$ cannot carrier sense each other. 
+Then it can happen that $C$ starts a transmission while $A$ is transmitting to $B$.
+This results in a collision and the receiver may not be able to recover any of the packets.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[height=0.1\linewidth]{figures/hidden.eps}
+  \caption{Hidden node problem}
+  \label{fig:hidden}
+\end{figure}
+
+The other problem is the ``exposed node problem'', illustrated in Figure \ref{fig:exposed}.
+In the example, $E$ is transmitting to $D$.
+Node $F$ wants to transmit to $G$, but it senses the channel busy (as it detects $E$'s transmission).
+$F$ does not transmit when, in fact, it could transmit without interfering with the other transmission.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[height=0.1\linewidth]{figures/exposed.eps}
+  \caption{Exposed node problem}
+  \label{fig:exposed}
+\end{figure}
+
