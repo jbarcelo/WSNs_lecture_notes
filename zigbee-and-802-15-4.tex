@@ -1,1 +1,65 @@
-\chapter{An introduction to zigbee and 802.15.4}
+\chapter{An introduction to Zigbee and IEEE 802.15.4}
+
+Zigbee and IEEE 802.15.4 are specification for the higher and lower network layers of WSNs.\footnote{This chapter is based on \cite{farahani2008zwn}}
+Zigbee devices are designed for low-range, low-complexity, low-cost and low-consumption applications.
+Zigbee includes low duty-cycle capabilities, which mean that the devices can sleep for most of the time.
+A zigbee product can potentially run on batteries for years.
+In our particular course, we use zigbee combined with Arduino.
+As Arduino is not designed for low consumption, it kills the possibility of running our prototypes on batteries for such a long time.
+
+Zigbee defines the network and application layers of the devices and relies on IEEE 802.15.4 for the MAC and PHY layers.
+The specification of Zigbee standards is carried out by the Zigbee Alliance, which comprises all kind of companies (semiconductor industry, OEMs, software developers, etc.).
+
+IEEE 802.15.4 operate in three different bands: 868 MHz, 915 MHz and 2.4 GHz.
+The 2.4 GHz band is a band for industrial, scientific and medical uses (ISM).
+This band is shared by many technologies, including the IEEE 802.11 family.
+Spread spectrum techniques are used to alleviate the problem of interference.
+The modulations that are used are BPSK, ASK and O-QPSK.
+
+Direct sequence spread spectrum (DSSS) or parallel sequence spread spectrum (PSSS) is used.
+
+\section{Devices}
+
+There are two different types of devices: full-function devices (FFD) and reduced-function devices (RFD).
+FFDs are more powerful and can assume any role in the network.
+RFDs are simpler, and can assume only the role of ``Device'' in the IEEE 802.15.4 terminology (equivalent to ``ZigBee End Device'' in the ZigBee terminology.
+
+The other two possible roles, that can be assumed only by FFDs are ``Coordinator'' and ``PAN Coordinator'' in the IEEE 802.15.4 terminology.
+These are equivalent to ``ZigBee Router'' and  ``ZigBee Coordinator'' in the ZigBee terminology.
+
+A ZigBee End Device can be the source or destination of a packet, but it cannot forward packets for other nodes.
+A ZigBee Router can relay packets of other nodes.
+And a ZigBee Coordinator is the head of the network.
+In every every network, there is one and only one Coordinator.
+
+Regarding the topologies, we can consider three different cases: star, tree and mesh.
+
+\section{Channel Access}
+
+In IEEE 802.15.4 there are two methods for networking: beacon-enabled networking and non-beacon networking.
+In beacon-enabled networking the coordinator transmits periodical beacons to synchronize the network.
+In these beacons, it is possible to define a super-frame structure.
+The super-frame structure spans the channel time between two consecutive beacons, and differentiates three periods: Contention Access Period (CAP), Contention Free Period (CFP, optional) and Inactive Period (IP, optional).
+The time is divided in slots, and multiple slots can be assigned to each of the different periods.
+In the CAP, the devices use CSMA/CA to contend for channel access.
+In the CFP, the channel time is reserved and only the devices that own the reservation can transmit.
+In the IP, the devices can go to sleep to save energy.
+
+In non-beacon networking, the devices must always contend for the channel.
+The contention uses the CSMA/CA protocol.
+Before transmitting, the devices sense the channel for the presence of an ongoing transmission.
+If a transmission is detected, the devices backs off and re-attempts after a random period of time.
+
+\section{MAC handshake}
+
+In a beacon-enabled network, a node that wants to transmit data to the coordinator waits for the CFP if it has a reservation.
+Otherwise, it waits for the CAP.
+Then it transmits the packet (using CSMA/CA if it is in contention mode).
+The sender can request acknowledgement and, in this case, the coordinator may acknowledge the reception.
+
+When a coordinator wants to transmit data to a device it indicates in the beacon the destination of the packet.
+The device processes the beacon and learns that there is data pending for it.
+After that, the device sends a ``data request'' message to the coordinator that the coordinator must acknowledge.
+Then the coordinator sends the data packet to the device which may acknowledge the correct reception.
+
+In a non-beacon network, a device can transmit to the coordinator whenever the channel is sensed empty.
