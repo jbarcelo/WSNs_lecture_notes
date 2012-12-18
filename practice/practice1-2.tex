@@ -1,0 +1,41 @@
+\section{Practice: Blinking LED}\label{practice1-2}
+In the following practice you will write your first Arduino application. Although simple, mastering it will provide you with clear understanding of the IDE and the components that conform the Arduino platform.
+
+It consist of a simple code that will turn on/off LED(s) plugged to the digital IO ports of the Arduino.
+
+\subsection{Preparing your development environment}
+For Practice~\ref{practice1-2}, you will need:
+\begin{itemize}
+ \item as many LEDs as you want, but always less than the number of digital IO ports.
+ \item a USB cable to connect your Arduino board to the PC.
+ \item the Arduino IDE, up and running.
+\end{itemize}
+
+Turn on your Arduino by plugging it to the PC. Make sure you have selected the appropriate COM port, as it is explained in Practice~\ref{practice1-1} according with your operating system.
+
+\subsection{The code}
+Once inside, enter the following code:
+
+\begin{verbatim}
+const int LED = 13; // LED connected to 
+                    //digital pin 13
+void setup()
+{
+  pinMode(LED,OUTPUT); // sets the digital
+                       // pin as output
+}
+void loop()
+{
+  digitalWrite(LED, HIGH); //turns LED on
+  delay(1000);             //waits 1000ms
+  digitalWrite(LED, LOW);  //turns LED off
+  delay(1000);
+}
+\end{verbatim}
+
+As you might be able to see, the code is completely readable. Let's review it line by line.
+
+\begin{itemize}
+ \item \texttt{const int LED = 13}: assigns the value $13$ to a \texttt{\color{red}{int}}erger variable, named LED. In this case, this number corresponds to the digital IO port \#13.
+ \item \texttt{void setup()} is the name of the next block of code. It is very similar to functions in languages like C/C++.
+\end{itemize}
