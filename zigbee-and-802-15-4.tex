@@ -1,6 +1,6 @@
 \chapter{An introduction to Zigbee and IEEE 802.15.4}
 
-Zigbee and IEEE 802.15.4 are specification for the higher and lower network layers of WSNs.\footnote{This chapter is based on \cite{farahani2008zwn}}
+Zigbee and IEEE 802.15.4 are specifications for the higher and lower network layers of WSNs.\footnote{This chapter is based on \cite{baronti2007wsn} and \cite{farahani2008zwn}}
 Zigbee devices are designed for low-range, low-complexity, low-cost and low-consumption applications.
 Zigbee includes low duty-cycle capabilities, which mean that the devices can sleep for most of the time.
 A zigbee product can potentially run on batteries for years.
@@ -9,14 +9,48 @@ As Arduino is not designed for low consumption, it kills the possibility of runn
 
 Zigbee defines the network and application layers of the devices and relies on IEEE 802.15.4 for the MAC and PHY layers.
 The specification of Zigbee standards is carried out by the Zigbee Alliance, which comprises all kind of companies (semiconductor industry, OEMs, software developers, etc.).
+The standardization of IEEE 802.15.4 is done by the IEEE.
 
-IEEE 802.15.4 operate in three different bands: 868 MHz, 915 MHz and 2.4 GHz.
+\section{IEEE 802.15.4}
+
+\subsection{IEEE 802.15.4 PHY layer}
+
+IEEE 802.15.4 operate in three different bands: 868 MHz (1 channel), 915 MHz (10 channels) and 2.4 GHz (16 channels).
 The 2.4 GHz band is a band for industrial, scientific and medical uses (ISM).
 This band is shared by many technologies, including the IEEE 802.11 family.
 Spread spectrum techniques are used to alleviate the problem of interference.
 The modulations that are used are BPSK, ASK and O-QPSK.
-
 Direct sequence spread spectrum (DSSS) or parallel sequence spread spectrum (PSSS) is used.
+
+The functionalities offered by the PHY layer of IEEE 802.15.4 include link quality estimation, energy detection and clear channel assessment.
+
+\subsection{IEEE 802.15.4 MAC layer}
+
+Regarding the MAC layer, the standard differentiates two types of devices: Reduced Function Devices (RFD) and Full Function Devices (FFD).
+RFDs are simpler, which means that their power consumption and their price can be lower.
+The only role that RFDs can play in a sensor network is that of end devices.
+RFDs cannot forward packets of other nodes.
+
+The FFD have extended functionality and can act as end devices and also as network coordinators.
+Network coordinators can send beacons for synchronization purposes and provide network join services.
+FFDs can also relay packets of other nodes for multi-hop communication.
+
+The standard considers two different alternatives for nodes to communicate: master-slave and peer-to-peer.
+In the master-slave situation, the slave communicates only with its master.
+There is a WSN coordinator (which has to be a FFD) that decides which of the two alternatives is used.
+
+In the master-slave situation, the master periodically broadcasts a beacon and the slave has to synchronize to the beacon to communicate with the master.
+The beacon contains control information about the WSN and also a superframe structure.
+The superframe divides the time interval between two beacons in three different parts:
+The Contention Access Period (CAP), the Contention Free Period (CFP) and the inactive period.
+
+In the CAP, the sensors contend for channel access using slotted CSMA/CA. 
+In the CFP, some of the nodes are assigned Guaranteed Time Slots (GTS) by the coordinator.
+This means that those slots are reserved for a particular sensor, and that sensor can transmit without contending for the channel.
+Finally, in the inactive period, the all the nodes can sleep to save power.
+
+The slaves only have to wake up to receive the beacons and to transmit or receive data.
+The master uses the beacon to indicate which of the slaves have data to be delivered.
 
 \section{Devices}
 
@@ -97,3 +131,6 @@ $F$ does not transmit when, in fact, it could transmit without interfering with 
   \label{fig:exposed}
 \end{figure}
 
+\section{Addresses and Network Layer}
+
+Each device has two addresses: a 16 bit short address and a 64-bit extended address.
