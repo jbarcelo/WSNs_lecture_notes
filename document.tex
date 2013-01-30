@@ -16,6 +16,8 @@
 
 \usepackage{hyperref}
 \usepackage{color}
+\usepackage[switch*]{lineno, hyperref} %line numbers on selected paragraphs
+\newcommand{\tab}{\hspace*{2em}}
 
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
@@ -55,8 +57,9 @@
 %
 \input{about.tex}
 \input{introToArduino.tex}
-  \input{practice/settingTheIDE.tex}
-  \input{practice/blinkingLED.tex}
+	\input{practice/settingTheIDE.tex}
+	\input{practice/blinkingLED.tex}
+	\input{practice/blinkingLEDAdvanced.tex}
 \input{zigbee-and-802-15-4.tex}
 \backmatter
 %
