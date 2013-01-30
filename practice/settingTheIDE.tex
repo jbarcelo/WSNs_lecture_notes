@@ -1,15 +1,15 @@
-\section{Practice: Installing the Arduino IDE}\label{practice1-1}
+\section{Practice: Installing the Arduino IDE}\label{pract:settingTheIDE}
 In the following practice, you will spend some time getting to know the Arduino platform, its connections and how to interact with it through the PC.
 
-\subsection{Reviewing the hardware}\label{p11:hardware}
+\subsection{Reviewing the hardware}\label{pract:settingTheIDE:hardware}
 As you were able to see in Figure~\ref{fig:Arduino_schematics}, the Arduino board contains a whole computer on a small chip, although it is at least a thousand times less powerful.
 
 Taking a closer look at Figure~\ref{fig:Arduino_schematics}, you will be able to see \emph{14 Digital IO pins (pins 0-13), 6 Analogue IN pins (0-5) and 6 Analogue OUT pins (pins 3, 5, 6, 9, 10, and 11)}.
 
-The \emph{Digital IO} pins, as the name suggests can be set to input or output. Their function is specified by the sketch you create in the IDE (more on IDE in Section~\ref{p11:IDE}). The \emph{Analogue IN} ports take analogue values (i.e., voltage readings from a sensor) and convert them into a number between 0 and 1023. As for the \emph{Analogue OUT} ports, are actually digital pins that can be reprogrammed for analogue output using the sketch you can create in the IDE.
+The \emph{Digital IO} pins, as the name suggests can be set to input or output. Their function is specified by the sketch you create in the IDE (more on IDE in Section~\ref{pract:settingTheIDE:IDE}). The \emph{Analogue IN} ports take analogue values (i.e., voltage readings from a sensor) and convert them into a number between 0 and 1023. As for the \emph{Analogue OUT} ports, are actually digital pins that can be reprogrammed for analogue output using the sketch you can create in the IDE.
 
-\subsection{The Arduino IDE}\label{p11:IDE}
-The Arduino Integrated Development Environment (IDE) is the responsible for making your code work in the Arduino board. Without entering in much unnecessary detail, what the IDE does is to translate your code into C language and compile it using \texttt{avr-gcc}, which makes it understandable to the microcontroller. This last step hides away as much as possible the complexities of programming microcontrollers, so you can spend more time thinking on your actual code.
+\subsection{The Arduino IDE}\label{pract:settingTheIDE:IDE}
+The Arduino Integrated Development Environment (IDE) is the responsible for making your code work in the Arduino board. Without entering in much unnecessary detail, what the IDE does is to translate your code into C language and compile it using \texttt{avr-gcc}, which makes it understandable to the micro-controller. This last step hides away as much as possible the complexities of programming micro-controllers, so you can spend more time thinking on your actual code.
 
 You can download the Arduino IDE~\emph{\color{blue}{\href{http://www.arduino.cc/en/Main/Software}{from here}}}. If you are using \emph{Linux} or \emph{Windows} operating systems, just double click the downloaded file. This will open a folder named \emph{arduino-[version]}, such as \emph{arduino-1.0}. Place the folder wherever you want in your system. On the Mac, just double click the downloaded file, this will open a disk image containing the Arduino application. Drag a drop the application icon to your Applications folder.
 
