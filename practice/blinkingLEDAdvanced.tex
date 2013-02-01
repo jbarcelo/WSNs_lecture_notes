@@ -26,7 +26,7 @@ Before writing any code, try to assemble the parts as shown in Figure~\ref{fig:b
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.7\linewidth]{figures/blinkingLEDAdvanced-scaled.eps}
+  \includegraphics[width=0.9\linewidth]{figures/blinkingLEDAdvanced-scaled.eps}
   \caption{Blinking LED advanced layout
   \label{fig:blinkingLEDAdvancedLayout}}
 \end{figure}
@@ -36,5 +36,64 @@ To avoid any confusion, let's review the layout component by component:
 \begin{enumerate}
 	\item Place the pushbutton on your breadboard. In Figure~\ref{fig:blinkingLEDAdvancedLayout}, the two pushbutton "legs" are inserted into holes $5$c and $6$c. In this example, the pushbutton will be energised through the $5$c leg.
 	\item Connect one of the legs of the resistor to the negative leg of the pushbutton (hole $6$b). This will physically connect the resistor to one of the legs of the pushbutton. Insert the other leg on hole $9$b.
-	\item In order to avoid confusion, cables on all figures are color coded. \emph{Red} represents power cables, \emph{blue} are connections to GND and \emph{cyan} are connections to IO pins on the Arduino.
+	\item In order to avoid confusion, cables on all figures are color coded. \emph{Red} represents power cables, \emph{blue} are connections to GND and \emph{cyan} are connections to IO pins on the Arduino. Try to duplicate the layout of Figure~\ref{fig:blinkingLEDAdvancedLayout}.
 \end{enumerate}
+
+Note that connecting the $+$ row to the Arduino's $5$V pin will provide $5$V to all the $+$ row. The same is true for GND and the $-$ row. This is very useful to avoid running out of $5$V of GND pins.
+
+
+\subsection{The code} \label{code:blinkingLEDAdvanced}
+
+Type the following instructions as a new file in the Arduino IDE:
+
+\begin{lstlisting} [caption = {Blinking LED advanced example code}, language = C, label = {code:blinkingLEDAdvanced}, numbers = left, escapeinside={@}{@}]
+// Turns on LED when pushbuttom is pressed and
+// turns it off when pressed again.
+
+const int LED = 11; @\label{BLA:LED}@
+const int BUTTON = 10; @\label{BLA:BUTTON}@
+int val = 0;@\label{BLA:val}@
+int old_val = 0; @\label{BLA:old_val}@
+int state = 0; @\label{BLA:state}@
+
+void setup(){
+	pinMode(LED, OUTPUT);@\label{BLA:pinModeLED}@
+	pinMode(BUTTON, INPUT);@\label{BLA:pinModeBUTTON}@
+}
+
+void loop(){
+	val = digitalRead(BUTTON);@\label{BLA:digitalRead}@
+	
+	//check if the button was pushed
+	if((val = = HIGH) && (old_val = = LOW)){@\label{BLA:ifState}@
+		state = 1 - state;
+		delay(10); @\label{BLA:delay}@
+	}@\label{BLA:endIfState}@
+	
+	old_val = val;@\label{BLA:old_valReasignment}@
+	if(state = = 1){
+		digitalWrite(LED, HIGH); @\label{BLA:turnOn}@
+	}else{
+		digitalWrite(LED, LOW);
+	}
+}
+\end{lstlisting}
+
+Let's review the code:
+
+\begin{itemize}
+	\item Line~\ref{BLA:LED}: sets the pin for the LED.
+	\item Line~\ref{BLA:BUTTON}: assigns the input pin where the pushbutton is connected.
+	\item Line~\ref{BLA:val}: \texttt{val} is the variable holding the state of the input pin corresponding to the pushbutton.
+	\item Line~\ref{BLA:old_val}: \texttt{old\_val} holds \texttt{val}'s previous value.
+	\item Line~\ref{BLA:state}: the variable \texttt{state} determines de condition of the LED. $0$ = off and $1$ = on.
+	\item Line~\ref{BLA:pinModeLED}: the function \texttt{pinMode()} sets the roll of each pin. In this case, pin \texttt{LED} is set to \texttt{OUTPUT}.
+	\item Line~\ref{BLA:pinModeBUTTON}: sets pin \texttt{BUTTON} to \texttt{INPUT}.
+	\item Line~\ref{BLA:digitalRead}: asks whether there is any power at the specified pin. It returns HIGH or LOW if the button is being pushed or not, respectively.
+	\item Line~\ref{BLA:ifState}: if the button is being pushed, then \texttt{val} = HIGH and \texttt{old\_val} = LOW. This provokes a change in \texttt{state}.
+	\item Line~\ref{BLA:delay}: prevents errors in the change of \texttt{state}. Given that \texttt{loop()} repeats several hundred thousand times per second, making the processor wait a little bit allows for a correct reading of the pushbutton.
+	\item Line~\ref{BLA:old_valReasignment}: the value of \texttt{val} is now old. Notice that once the LED is turned on, \texttt{val} = \texttt{old\_val} = LOW. Furthermore, \texttt{val} only changes when the button is pushed.
+	\item Line~\ref{BLA:turnOn}: turn LED on.
+\end{itemize}
+
+

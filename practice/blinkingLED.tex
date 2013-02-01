@@ -13,37 +13,37 @@ For Practice~\ref{pract:blinkingLED}, you will need:
 
 Turn your Arduino on by plugging it to the PC. Make sure you have selected the appropriate COM port, as it is explained in Practice~\ref{pract:settingTheIDE} according with your operating system.
 
-\subsection{The code} \label{code:blinkingLED}
+\subsection{The code} 
 Once inside, enter the following code:
 
-\begin{linenumbers}
-\texttt{\#Blinking LED example code:\\
-const int LED = 13; \linelabel{line:LED} \\
-void setup() \linelabel{line:SETUP}\\
-\{\\
-	\tab pinMode(LED,OUTPUT); \linelabel{line:pinMODE} \\
-\}\\
-void loop() \linelabel{line:LOOP}\\
-\{\\
-	\tab digitalWrite(LED, HIGH); \linelabel{line:HIGH}\\
-	\tab delay(1000); \linelabel{line:DELAY}\\
-	\tab digitalWrite(LED, LOW); \linelabel{line:LOW}\\
-	\tab delay(1000); \linelabel{line:DELAY2}\\
-\}
+\begin{lstlisting} [caption = {Blinking LED example code}, language = C, label = {code:blinkingLED}, numbers = left, escapeinside={@}{@}]
+const int LED = 13; @\label{BL:LED}@
+
+void setup() @\label{BL:SETUP}@
+{
+	pinMode(LED,OUTPUT); @\label{BL:pinMODE}@
 }
-\end{linenumbers}
+
+void loop() @\label{BL:LOOP}@
+{
+	digitalWrite(LED, HIGH); @\label{BL:HIGH}@
+	delay(1000); @\label{BL:DELAY}@
+	digitalWrite(LED, LOW); @\label{BL:LOW}@
+	delay(1000); @\label{BL:DELAY2}@
+}
+\end{lstlisting}
 
 As you might be able to see, the code is completely readable. Let's review it line by line.
 
 \begin{itemize}
-	\item Line~\lineref{line:LED}: \texttt{const int LED = 13}, assigns the value $13$ to a \texttt{\color{red}{int}}erger variable, named LED. In this case, this number corresponds to the digital IO port \#13.
-	\item Line~\lineref{line:SETUP}: \texttt{void setup()} is the name of the next block of code. It is very similar to functions in languages like C/C++ and it is generally used to assign variables to ports, as well as their role.
-	\item Line~\lineref{line:pinMODE}: \texttt{pinMode(LED,OUTPUT)} tells the Arduino how to set the pins. In this case, pin LED ($\#13$) is set up as an OUTPUT. \texttt{pinMode} is a function, and the words or numbers inside the parenthesis are its arguments.
-	\item Line~\lineref{line:LOOP}: \texttt{void loop()}: is where you define the behaviour of your device. The statements contained in \texttt{loop()} are repeated over and over again until the device is turned off.
-	\item Line~\lineref{line:HIGH}: \texttt{digitalWrite(LED, HIGH)} works as a power socket for pins. In this case, the command is indicating to turn pin \texttt{LED} into \texttt{HIGH}, which instructs Arduino to turn the output pin to $5$V. If you have connected a LED in this pin, the result is that it will turn on (hopefully). Turning on and off the pin allow us to see what the software is making the hardware do; the LED is an actuator.
-	\item Line~\lineref{line:DELAY}: \texttt{delay(1000)} tells the processor to wait for $1000$ \emph{milliseconds} before proceeding to the next code line.
-	\item Line~\lineref{line:LOW}: \texttt{digitalWrite(LED, LOW)} as with Line~\lineref{line:HIGH}, this function turns pin \texttt{LED} to $0$V, causing the connected LED to turn off. You can do a mental map in which $HIGH \rightarrow ON,\ LOW \rightarrow OFF$.
-	\item Line~\lineref{line:DELAY2}: because the last instruction was to set the LED off, this will keep it that way for an additional $1000$ \emph{millisecods}.
+	\item Line~\ref{BL:LED}: \texttt{const int LED = 13}, assigns the value $13$ to a \texttt{\color{red}{int}}erger variable, named LED. In this case, this number corresponds to the digital IO port \#13.
+	\item Line~\ref{BL:SETUP}: \texttt{void setup()} is the name of the next block of code. It is very similar to functions in languages like C/C++ and it is generally used to assign variables to ports, as well as their role.
+	\item Line~\ref{BL:pinMODE}: \texttt{pinMode(LED,OUTPUT)} tells the Arduino how to set the pins. In this case, pin LED ($\#13$) is set up as an OUTPUT. \texttt{pinMode} is a function, and the words or numbers inside the parenthesis are its arguments.
+	\item Line~\ref{BL:LOOP}: \texttt{void loop()}: is where you define the behaviour of your device. The statements contained in \texttt{loop()} are repeated over and over again until the device is turned off.
+	\item Line~\ref{BL:HIGH}: \texttt{digitalWrite(LED, HIGH)} works as a power socket for pins. In this case, the command is indicating to turn pin \texttt{LED} into \texttt{HIGH}, which instructs Arduino to turn the output pin to $5$V. If you have connected a LED in this pin, the result is that it will turn on (hopefully). Turning on and off the pin allow us to see what the software is making the hardware do; the LED is an actuator.
+	\item Line~\ref{BL:DELAY}: \texttt{delay(1000)} tells the processor to wait for $1000$ \emph{milliseconds} before proceeding to the next code line.
+	\item Line~\ref{BL:LOW}: \texttt{digitalWrite(LED, LOW)} as with Line~\ref{BL:HIGH}, this function turns pin \texttt{LED} to $0$V, causing the connected LED to turn off. You can do a mental map in which $HIGH \rightarrow ON,\ LOW \rightarrow OFF$.
+	\item Line~\ref{BL:DELAY2}: because the last instruction was to set the LED off, this will keep it that way for an additional $1000$ \emph{millisecods}.
 \end{itemize}
 
 To see your work, just insert the longer leg of the LED into the digital IO port you assigned to variable \texttt{LED} on your code (digital pin $13$), and the shorter leg to ground (GND). Figure~\ref{fig:blinkingLEDLayout} shows the desired layout.
