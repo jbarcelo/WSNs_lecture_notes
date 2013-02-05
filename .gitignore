@@ -9,3 +9,8 @@
 *.bak
 *.old
 *.toc
+figures/*.pdf
+TSWLatexianTemp*
+*.backup
+figures/raw
+figures/.DS_Store
