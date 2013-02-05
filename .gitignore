@@ -14,3 +14,4 @@ TSWLatexianTemp*
 *.backup
 figures/raw
 figures/.DS_Store
+*.out
