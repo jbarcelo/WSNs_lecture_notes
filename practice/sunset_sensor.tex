@@ -1,0 +1,20 @@
+\chapter{Sunset Sensor}
+
+In this lab assignment you will create a sunset sensor using a light-dependant resistor (LDR).
+If there is plenty of light, it means than the Sun is high in the sky.
+In the case of complete darkness, the Sun has already gone.
+The sunset detector will display an alarm (either an LED or buzzer) for intermediate lighting ranges.
+
+The detector consists of two parts that communicate wirelessly, namely the sensor board and the processing board.
+The sensor board contains the LDR and an XBee that takes measures and sends them to the other part.
+The processing board contains an XBee to receive the data and an Arduino to process it.
+The processing board also contains the alarm (LED, buzzer or both).
+
+Use a resistor in series with the LDR to obtain a range of values readable for the XBee analog input.
+Take a sample every 200 ms.
+
+On the processing board, use the API firmware to be able to serially read the values that the remote XBee is sending.
+Check which is the received value and if it is in the range of interest (intermediate) activate the alarm (LED or buzzer).
+
+If you are willing to do more complicated stuff, try to move the alarm to the sensor board. 
+Now the sensor board receives the data, sends it to the processing board for processing, and waits for an instruction from the processing board to ring or light the alarm.
