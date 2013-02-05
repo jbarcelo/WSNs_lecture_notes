@@ -15,3 +15,4 @@ TSWLatexianTemp*
 figures/raw
 figures/.DS_Store
 *.out
+*.bak
