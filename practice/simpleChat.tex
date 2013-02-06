@@ -1,1 +1,99 @@
 \section{Practice: Simple chat with XBee}\label{pract:simpleChat}
+
+WSNs are composed of nodes able to send messages among themselves. In this practice you will be guided through the configuration of (at least) two XBees to build a basic chat application. Furthermore, you will have the opportunity to familiarize yourself with the XBee and the different AT commands described in Chapter~\ref{introToXBee}.
+
+You will need:
+
+\begin{itemize}
+	\item One XBee Series 2 configured as a \texttt{ZIGBEE COORDINATOR AT}.
+	\item One XBee Series 2 configured as a \texttt{ZIGBEE ROUTER AT}.
+	\item As many breakout boards and USB cable A to mini B as XBee radios.
+	\item One computer per XBee. It is less confusing than establishing multiple terminal sessions from one computer.
+\end{itemize}
+
+We need to be able to distinguish the coordinator radio from the router radios. It is easier if you write this addresses down. Proceed as follows:
+
+\begin{enumerate}
+	\item Establish a terminal connection to the coordinator radio.
+	\item Once inside, issue the \texttt{+++} to enter to command mode.
+	\item Type \texttt{ATSL} to reveal the lower part of the XBee serial number.
+	\item Write it down: {\bfseries Coordinator address:} $0013$A$200$ \underline{\ \ \ \ \ \ \ \ \ \ \ \ }
+\end{enumerate}
+
+Repeat the same for the router AT.
+
+{\bfseries Router address:} $0013$A$200$ \underline{\ \ \ \ \ \ \ \ \ \ \ \ }
+
+Now, let's configure the coordinator.
+
+\subsection{The code: coordinator}
+
+The settings for the coordinator are contained in Table~\ref{tab:xbeeChatCoordinator} below.
+
+\begin{table}[htbp]
+	\centering
+	\caption{XBee coordinator settings for simple chat}
+	\label{tab:xbeeChatCoordinator}
+	\scalebox{0.7}{
+	\begin{tabular}{c||c||c}
+		\hline
+		\bfseries Description & \bfseries Command & \bfseries Parameter\\
+		\hline\hline
+		PAN ID & \texttt{ATID} & {\bfseries 2013}\\
+		Destination address \emph{high} & \texttt{ATDH} & {\bfseries 0013A200}\\
+		Destination address \emph{low} & \texttt{ATDL} & {\bfseries\underline{\ \ \ \ \ \ \ \ \ \ \ \ }}\\
+		\hline
+	\end{tabular}}
+\end{table}
+
+Note that the \emph{Destination address low} specified in Table~\ref{tab:xbeeChatCoordinator} correspond to the \underline{router} radio.
+
+Issuing the commands on the terminal window will look like the listing below.
+
+\begin{lstlisting} [caption = {Coordinator settings as seen in the terminal}, label = {code:xbeeChatCoordinator}, numbers = left, escapeinside={@}{@}]
++++
+OK
+ATID 2013
+OK@\label{SC:instructionOK}@
+ATDH 0013A300
+OK
+ATDL ____ //put the lower part of the router address
+OK
+ATID
+2013
+ATDH
+0013A300
+ATDL
+____
+ATWR
+OK@\label{SC:writeOK}@
+\end{lstlisting}
+
+You will receive an \texttt{OK} after issuing a command (as in Line~\ref{SC:instructionOK}) as well as when writing to the firmware (Line~\ref{SC:writeOK}).
+
+\subsection{The code: router}
+
+The settings for the router must contain the same information collected for the coordinator. Fill out Table~\ref{tab:xbeeChatRouter} accordingly.
+
+\begin{table}[htbp]
+	\centering
+	\caption{XBee router settings for simple chat}
+	\label{tab:xbeeChatRouter}
+	\scalebox{0.7}{
+	\begin{tabular}{c||c||c}
+		\hline
+		\bfseries Description & \bfseries Command & \bfseries Parameter\\
+		\hline\hline
+		PAN ID & \texttt{ATID} & {\bfseries 2013}\\
+		Destination address \emph{high} & \texttt{ATDH} & {\bfseries 0013A200}\\
+		Destination address \emph{low} & \texttt{ATDL} & {\bfseries\underline{\ \ \ \ \ \ \ \ \ \ \ \ }}\\
+		\hline
+	\end{tabular}}
+\end{table}
+
+Note that the \emph{Destination address low} specified in Table~\ref{tab:xbeeChatRouter} correspond to the \underline{coordinator} radio.
+
+\subsubsection{Chat!}
+Now you just have to connect each XBee to one computer and establish a terminal connection to each one (or connect the two radios to the same computer running two different terminal applications, one for each XBee). Make sure all the connection settings are as specified in Table~\ref{tab:terminalParameters}, so you will not have any problems.
+
+If both radios are in transparent mode (see Table~\ref{tab:xbeeATModes}), everything you type in one terminal will be forwarded to the other XBee.
