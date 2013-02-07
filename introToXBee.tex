@@ -44,11 +44,18 @@ As the pins on the XBee are separated differently than the holes in the breadboa
     \label{fig:xbeeAndBreakoutBoard}}
 \end{figure}
 
-It is important to notice that once the XBee is placed on the breakout board, the pins functions change. The new role of each pin is now the displayed underneath the breakout board.
+It is important to notice that once the XBee is placed on the breakout board, the pins functions change. The new role of each pin is now the displayed underneath the breakout board, as in Figure~\ref{fig:xbeeBreakoutBoardPins}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/xbeeBreakoutBoardPins.eps}
+  \caption{XBee Explorer pins
+  \label{fig:xbeeBreakoutBoardPins}}
+\end{figure}
 
 Now that the device is properly placed, we need to setup a connection so the current configuration can be reviewed and changed.
 
-\subsubsection{Accessing the firmware}
+\subsubsection{Accessing the firmware}\label{xbeeRoleConfiguration}
 
 The XBee has a microcontroller running a configurable firmware. This firmware holds the necessary information for addressing, communication, security and utility functions. You can configure this firmware to change different settings like: local address, security settings, destination address and how the analog sensors connected to its pins are read.
 
