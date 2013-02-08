@@ -1,4 +1,4 @@
-\chapter{Introduction to XBee}
+\chapter{Introduction to XBee}\label{introToXBee}
 
 One of the main characteristics of WSNs is the ability each node has to wirelessly communicate with other nodes. 
 During this course we will be doing this with ZigBee protocol compliant radios, like XBee~\cite{faludi2010bws}.
@@ -44,11 +44,18 @@ As the pins on the XBee are separated differently than the holes in the breadboa
     \label{fig:xbeeAndBreakoutBoard}}
 \end{figure}
 
-It is important to notice that once the XBee is placed on the breakout board, the pins functions change. The new role of each pin is now the displayed underneath the breakout board.
+It is important to notice that once the XBee is placed on the breakout board, the pins functions change. The new role of each pin is now the displayed underneath the breakout board, as in Figure~\ref{fig:xbeeBreakoutBoardPins}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/xbeeBreakoutBoardPins.eps}
+  \caption{XBee Explorer pins
+  \label{fig:xbeeBreakoutBoardPins}}
+\end{figure}
 
 Now that the device is properly placed, we need to setup a connection so the current configuration can be reviewed and changed.
 
-\subsubsection{Accessing the firmware}
+\subsubsection{Accessing the firmware}\label{xbeeRoleConfiguration}
 
 The XBee has a microcontroller running a configurable firmware. This firmware holds the necessary information for addressing, communication, security and utility functions. You can configure this firmware to change different settings like: local address, security settings, destination address and how the analog sensors connected to its pins are read.
 
@@ -75,7 +82,7 @@ Luckily, X-CTU is only required for upgrading the firmware. For changing the XBe
 	\item Click on the \emph{Write} button to program this device as a coordinator.
 \end{enumerate}
 
-Once the installation is complete, gently remove the USB from the first XBee radio a plug it into another. Repeat the process described above, but now under \emph{Function Set} choose \texttt{ZIGBEE ROUTER AT}. Select the highest version available and click on \emph{Write} to program de device.
+Once the installation is complete, gently remove the USB from the first XBee radio a plug it into another. Repeat the process described above, but now under \emph{Function Set} choose \texttt{ZIGBEE ROUTER AT}. Select the highest version available and click on \emph{Write} to program the device.
 
 It is important to distinguish between the two XBee you just configured, given that they behave differently. Every ZigBee network must contain only one coordinator radio, this way the network can be properly defined and managed. Mark which configuration each radio has with a sticker to eliminate any confusion.
 
@@ -120,6 +127,20 @@ There are a lot of terminal applications. Fortunately, most of them need the sam
 	\end{tabular}}
 \end{table}
 
-To check if you are already inside the XBee, try asking the radio to go to Command mode issuing the \texttt{+++} instruction. If after a moment an \texttt{OK} appears at the right hand side, then you are in!
+To check if you are already inside the XBee, try asking the radio to go to command mode issuing the \texttt{+++} instruction. If after a moment an \texttt{OK} appears at the right hand side, then you are in!
 
+\subsubsection{Reviewing some AT commands for the XBee}
 
+Issuing commands from a serial connection (like the one you established with the terminal program) to the XBee follows a simple guideline: \emph{instruction parameter} \texttt{<CR>}. Where \texttt{<CR>} accounts for \emph{carriage return}, and just means that you have to press the Return (Enter) key to submit the command. Passing and empty \emph{parameter} just outputs the current value of the specified register (the \emph{instruction} part of the command).
+
+All AT commands start with the \texttt{AT} prefix (accounting for \emph{attention}) and then are followed by a two letter character command identification. Some of the basic AT commands are described below, as well as in~\cite{faludi2010bws}.
+
+\begin{itemize}
+	\item \texttt{AT}: gets the attention of the XBee. Its normal output is \texttt{OK}. If you do not receive this output,  you've probably timed out of command mode and need to reissue the \texttt{+++} command to get back in it.
+	\item \texttt{ATID}: without any parameter it shows the current Personal Area Network ID (PAN ID) that is assigned to the radio. You can set a PAN ID passing an hexadecimal number in the range $0$x$0$-$0$xFFFF as a parameter.
+	\item \texttt{ATSH/ATDL}: it shows the \emph{high} or \emph{low} parts of the unique XBee $64$-bit serial number, respectively. This number cannot be changed, so passing a parameter will produce an \texttt{ERROR} response.
+	\item \texttt{ATDH/ATDL}: it shows the \emph{high} or \emph{low} parts of the \underline{destination} address the local radio will forward messages to, respectively. Putting address information after \texttt{ATDH} or \texttt{ATDL} will set the \emph{high} or \emph{low} parts of the destination address, accordingly.
+	\item \texttt{ATWR}: saves the current configuration to firmware, so it will become the default configuration the next time you power on the XBee.
+\end{itemize}
+
+		
