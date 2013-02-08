@@ -49,6 +49,31 @@ For the router, configure the PANID, the destination address (both high and low)
 
 For the coordinator, you just have to configure the PANID and the destination's address.
 
+\section{Connections}
+
+For prototyping purposes, we will place the sensing and the processing board next to the other as in Fig. \ref{fig:sunset_sensor}, to make it possible to power both of them using the Arduino.
+For real deployment, you could use batteries to power the sensor board.
+
+Connect digital outputs 10, 11 and 12 to the LEDs.
+Optionally you can also connect a buzzer if you are feeling noisy.
+
+Connect also the LDR in series with a resistor that is twice as much the LDR (20 Kohm).
+The input to the XBee is precisely the connection between the LDR and the resistor.
+
+Make sure that the RSSI LEDs of the explorer are on, which means that both of them are in the same network.
+Note that we are using the series communication pins to pass information from the XBee to the Arduino.
+This wires need to be removed to program the Arduino, as the programming process also uses the serial communication port.
+
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/sunset_sensor.eps}
+  \caption{Sunset sensor connections}
+  \label{fig:sunset_sensor}
+\end{figure}
+
+
 \section{Advanced optional assignment}
 
 If you are willing to do more complicated stuff, try to move the alarm to the sensor board. 

@@ -14,7 +14,7 @@
 #
 
 MAIN		= document
-SOURCES		= $(wildcard ./*.tex)
+SOURCES		= $(wildcard ./*.tex) $(wildcard ./practice/*.tex)
 EPSFIGURES	= $(patsubst %.fig,%.eps,$(wildcard ./figures/*.fig))
 PDFFIGURES	= $(patsubst %.fig,%.pdf,$(wildcard ./figures/*.fig))
 
