@@ -73,6 +73,76 @@ This wires need to be removed to program the Arduino, as the programming process
   \label{fig:sunset_sensor}
 \end{figure}
 
+\section{The code}
+
+The following code reads a word value (2 bytes) from the serial port and blinks one of the LEDs accordingly.
+The ranges of day, sunset and night might need to be adjusted. 
+
+There is a debug LED that you can use to troubleshoot.
+This LED blinks when Arduino reads data from the XBee.
+
+
+\begin{lstlisting} [caption = {Sunset sensor}, language = C, label = {code:sunset_sensor}, numbers = left, escapeinside={@}{@}]
+// This code is derived from Robert Faludi's book
+// "Building Wireless Sensor Networks"
+// Check the original for further explanations
+
+int LED_NIGHT = 10;
+int LED_SUNSET = 11;
+int LED_DAY = 12;
+int debugLED = 13;
+int analogValue = 0;
+
+void setup() {
+    pinMode(LED_DAY,OUTPUT);
+    pinMode(LED_SUNSET,OUTPUT);
+    pinMode(LED_NIGHT,OUTPUT);
+    pinMode(debugLED,OUTPUT);
+    Serial.begin(9600);
+}
+
+void loop() {
+    digitalWrite(LED_NIGHT, LOW);
+    digitalWrite(LED_SUNSET, LOW);
+    digitalWrite(LED_DAY, LOW);
+    // make sure everything we need is in the buffer
+    if (Serial.available() >= 21) {
+        // look for the start byte
+        if (Serial.read() == 0x7E) {
+            //blink debug LED to indicate when data is received
+            digitalWrite(debugLED, HIGH);
+            delay(10);
+            digitalWrite(debugLED, LOW);
+            // read the variables that we're not using out of the buffer
+            for (int i = 0; i<18; i++) {
+                byte discard = Serial.read();
+            }
+            int analogHigh = Serial.read();
+            int analogLow = Serial.read();
+            analogValue = analogLow + (analogHigh * 256);
+        }
+    }
+
+    if (analogValue > 0 && analogValue <= 350) {
+        digitalWrite(LED_NIGHT, HIGH);
+        delay(10);
+        digitalWrite(LED_NIGHT, LOW);
+    }
+
+    if (analogValue > 350 && analogValue <= 750) {
+        digitalWrite(LED_SUNSET, HIGH);
+        delay(10);
+        digitalWrite(LED_SUNSET, LOW);
+    }
+
+    if (analogValue > 750 && analogValue <= 1023) {
+        digitalWrite(LED_DAY, HIGH);
+        delay(10);
+        digitalWrite(LED_DAY, LOW);
+      }
+}
+\end{lstlisting}
+
 
 \section{Advanced optional assignment}
 
