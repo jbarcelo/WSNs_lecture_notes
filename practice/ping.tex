@@ -69,7 +69,72 @@ ser.close()
 
 The provided code should work as soon as you connect the two XBees. 
 You can plug the USB cables to power the two XBees and check that everythin is working.
+Observe the terminal on the computer with the measured delay and the RSSI indicator in the Explorer that flashes when data is transmitted.
 Try to disconnect the remote XBee and observe what happens.
 
 To make thinks more interesting, we will connect an Arduino to the remote XBee and flash a light each time that it receives a packet.
-We will use the ``xbee-arduino'' library in the Arduino as explained in the listing 
+We will use the ``xbee-arduino'' library in the Arduino as explained in the listing \ref{code:flashping}.
+Each time that we receive a packet we read the first byte and flash the LED as many times as indicated in that byte.
+
+\begin{lstlisting} [caption = {Sunset sensor}, language = C, label = {code:flashping}, numbers = left, escapeinside={@}{@}]
+#include <XBee.h>
+
+int ledPin = 13;
+
+XBee xbee = XBee();
+XBeeResponse response = XBeeResponse();
+// create reusable response objects for responses we expect to handle 
+ZBRxResponse rx = ZBRxResponse();
+
+void flashLed(int pin, int times, int wait) {
+
+    for (int i = 0; i < times; i++) {
+      digitalWrite(pin, HIGH);
+      delay(wait);
+      digitalWrite(pin, LOW);
+
+      if (i + 1 < times) {
+        delay(wait);
+      }
+    }
+}
+
+void setup() {
+  xbee.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  flashLed(ledPin, 10, 50);    // sets the LED off
+}
+
+void loop() {
+
+
+  // 1. This will read any data that is available:
+  xbee.readPacket();
+  if (xbee.getResponse().isAvailable()) {
+    if (xbee.getResponse().getApiId() == ZB_RX_RESPONSE) {
+      xbee.getResponse().getZBRxResponse(rx);
+      //flashLed(ledPin, 1, 100);    // sets the LED off
+      flashLed(ledPin, rx.getData(0), 100);    // sets the LED off
+    }
+  }
+}
+\end{lstlisting}
+
+Program the Arduino and then connect it to the XBee. 
+We are going to use the serial port to communicate with the XBee, and this same port is also used to program the Arduino.
+Don't connect the arduino/XBee serial connection until you have programmed the arduino.
+After the arduino is programmed you can connect the tx/rx ports to the din/dout ports of the XBee.
+Use the 3.3V and GND of the arduino to power the XBee.
+
+Test that everything is working and the arduino flashes the number of times indicated by the computer.
+
+\section{Next steps}
+
+You can perform additional experiments  building on the basic examples provided here.
+For example:
+\begin{itemize}
+\item Collaborate with another group to make ping measurements in a multi-hop setting.
+\item Use a different frame identifier for each ping and compute packet loss.
+\item Use broadcast messages to flash leds in all the arduinos of the network.
+\item Set a LED on a remote breadboard when the RTT is above a threshold.
+\end{itemize}
