@@ -15,9 +15,9 @@ curl --request POST \
 \end{lstlisting}
 
 Use the API Key you obtained in the previous step.
-Next edit a json file (name it, for example, cosm.json) with the contents detailed in listing \ref{code:json-data}.
+Next edit a json file (name it, for example, cosm.json) with the contents detailed in listing \ref{code:data-json}.
 
-Observe the output as in Fig. \ref{fig:create_feed} and you will observe a feed id (the last number in the Location line).
+Observe the output as in Fig. \ref{fig:create-feed} and you will observe a feed id (the last number in the Location line).
 
 \begin{figure}[htbp]
   \centering
@@ -70,7 +70,7 @@ You can also read data from the command line as exemplified in Fig. \ref{fig:rea
 The next step is to gather information from an XBee and publish it in COSM.
 Use the code detailed in listing \ref{code:XBee2COSM} as a reference.
 
-\begin{lstlisting} [caption = {Command to upload data to a feed}, language = python, label = {code:XBee2CSOM}, numbers = left, escapeinside={@}{@}]
+\begin{lstlisting} [caption = {Command to upload data to a feed}, language = python, label = {code:XBee2COSM}, numbers = left, escapeinside={@}{@}]
 # Derived from code by Alejandro Andreu
 import commands
 import json
