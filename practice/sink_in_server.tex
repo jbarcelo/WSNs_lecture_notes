@@ -79,7 +79,7 @@ serial_port.close()
 You can change the configuration of your router from the coordinator. 
 The code snippet in listing \ref{code:sampling-rate}.
 
-\begin{lstlisting} [caption = {Simple code that asynchronously reads the message that arrive to the XBee.}, language = Python, label = {code:sampling-rate}, numbers = left, escapeinside={@}{@}]
+\begin{lstlisting} [caption = {This example remotely sets the configuration of the XBee, in particular the sample rate.}, language = Python, label = {code:sampling-rate}, numbers = left, escapeinside={@}{@}]
 
 zigbee.send('remote_at',
           frame_id='A',
