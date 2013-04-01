@@ -1,4 +1,4 @@
-\chapter{Sleep}
+\chapter{Practice: Sleep}
 Flash an XBee with the End-Device AT firmware using X-CTU.
 First, plug the XBee in the XBee explorer socket and connect the USB cable.
 Use the \texttt{dmesg} command to find to which device is the USB attached.
@@ -24,3 +24,6 @@ Then set the port as in Fig. \ref{fig:set-port} and test that you can connect to
   \caption{LDR}
   \label{fig:test-xctu}
 \end{figure}
+
+Repeat the lab assignment ``collecting data in a computer'' but this time the sensors will be awake for 1 second and then sleep for 10 seconds.
+While the sensor is awake, it will send a sample every 100ms.
