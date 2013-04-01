@@ -1,4 +1,5 @@
-\section{Practice: Simple chat with XBee}\label{pract:simpleChat}
+\chapter{Practice: Simple chat with XBee}\label{pract:simpleChat}
+\section*{Suggested read: Chapter \ref{introToXBee}}
 
 WSNs are composed of nodes able to send messages among themselves. In this practice you will be guided through the configuration of (at least) two XBees to build a basic chat application. Furthermore, you will have the opportunity to familiarize yourself with the XBee and the different AT commands described in Chapter~\ref{introToXBee}.
 
@@ -26,7 +27,7 @@ Repeat the same for the router AT.
 
 Now, let's configure the coordinator.
 
-\subsection{The code: coordinator}
+\section{The code: coordinator}
 
 The settings for the coordinator are contained in Table~\ref{tab:xbeeChatCoordinator} below.
 
@@ -71,7 +72,7 @@ OK@\label{SC:writeOK}@
 
 You will receive an \texttt{OK} after issuing a command (as in Line~\ref{SC:instructionOK}) as well as when writing to the firmware (Line~\ref{SC:writeOK}).
 
-\subsection{The code: router}
+\section{The code: router}
 
 The settings for the router must contain the same information collected for the coordinator. Fill out Table~\ref{tab:xbeeChatRouter} accordingly.
 
@@ -93,7 +94,7 @@ The settings for the router must contain the same information collected for the 
 
 Note that the \emph{Destination address low} specified in Table~\ref{tab:xbeeChatRouter} correspond to the \underline{coordinator} radio.
 
-\subsubsection{Chat!}
+\subsection{Chat!}
 Now you just have to connect each XBee to one computer and establish a terminal connection to each one (or connect the two radios to the same computer running two different terminal applications, one for each XBee). Make sure all the connection settings are as specified in Table~\ref{tab:terminalParameters}, so you will not have any problems.
 
 If both radios are in transparent mode (see Table~\ref{tab:xbeeATModes}), everything you type in one terminal will be forwarded to the other XBee.

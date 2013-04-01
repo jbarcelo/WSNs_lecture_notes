@@ -1,15 +1,16 @@
-\chapter{Collecting data in a computer}
+\chapter{Practice: Collecting data in a computer}
+\section*{Suggested read: Chapers~\ref{ATSensorNetwork} and~\ref{sunsetSensor}}
 
-In this assignment we will use some python libraries to receive the data transmitted by the sunset sensor in a computer instead of the Arduino.
+In this assignment we will use some Python libraries to receive the data transmitted by the sunset sensor in a computer instead of the Arduino.
 You can use one of the university computers, a laptop or a RaspBerry.
 
-Install the XBee python libraries.
+Install the XBee Python libraries.
 
 \url{http://pypi.python.org/pypi/XBee/2.0.0}
 
 This code offers an implementation of the XBee serial communication API.
 
-We re-use the processing board of the previous assignment and this time we will connect the XBee that receives the data to the computer using the USB cable.
+We re-use the processing board of the previous assignment (refer to Chapter~\ref{sunsetSensor}) and this time we will connect the XBee that receives the data to the computer using the USB cable.
 Remember that in the last assignment it was connected to the Arduino.
 
 \begin{lstlisting} [caption = {Simple code that reads the message that arrive to the XBee.}, language = Python, label = {code:simple-receiver}, numbers = left, escapeinside={@}{@}]
@@ -36,7 +37,7 @@ You can see the results of running the program in Fig. \ref{fig:sink_in_server_s
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\linewidth]{figures/sink_in_server_screenshot_first_test.eps}
-  \caption{A test run of a python program to read the messages that arrive to the XBee.}
+  \caption{A test run of a Python program to read the messages that arrive to the XBee.}
   \label{fig:sink_in_server_screenshot_first_test}
 \end{figure}
 
@@ -44,7 +45,7 @@ If the processing of each incoming packet takes a long time, the processing must
 An example of long processing time can be uploading the data to the Internet.
 
 We will define a (callback) function that is called whenever a packet is arrived.
-See the listing \ref{code:asynchronous-receiver} for example code.
+See the Listing \ref{code:asynchronous-receiver} for example code.
 
 \begin{lstlisting} [caption = {Simple code that asynchronously reads the message that arrive to the XBee.}, language = Python, label = {code:asynchronous-receiver}, numbers = left, escapeinside={@}{@}]
 
@@ -77,7 +78,7 @@ serial_port.close()
 \end{lstlisting}
 
 You can change the configuration of your router from the coordinator. 
-The code snippet in listing \ref{code:sampling-rate}.
+The code snippet in Listing \ref{code:sampling-rate}.
 
 \begin{lstlisting} [caption = {This example remotely sets the configuration of the XBee, in particular the sample rate.}, language = Python, label = {code:sampling-rate}, numbers = left, escapeinside={@}{@}]
 
@@ -90,5 +91,5 @@ zigbee.send('remote_at',
 
 \end{lstlisting}
 
-Collaborate with other groups to create larger networks and explore what you can do with the data using python programs (computing averages? sending an email upon a trigger event? dynamically adapting the sampling rate as a function of the measured vales?).
+Collaborate with other groups to create larger networks and explore what you can do with the data using Python programs (computing averages? sending an email upon a trigger event? dynamically adapting the sampling rate as a function of the measured vales?).
 

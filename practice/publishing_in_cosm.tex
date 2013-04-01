@@ -1,6 +1,6 @@
-\chapter{Publishing data in cosm}
+\chapter{Practice: Publishing data in Csosm}
 
-Create a user in cosm.com .
+Create a user in \emph{\color{blue}{\href{http://cosm.com}{Cosm.com}}} .
 You will receive an email with a pointer to create an API-Key.
 Create this key as you will need it to interact with cosm.
 
@@ -15,7 +15,7 @@ curl --request POST \
 \end{lstlisting}
 
 Use the API Key you obtained in the previous step.
-Next edit a json file (name it, for example, cosm.json) with the contents detailed in listing \ref{code:data-json}.
+Next edit a JSON file (name it, for example, cosm.json) with the contents detailed in Listing \ref{code:data-json}.
 
 Observe the output as in Fig. \ref{fig:create-feed} and you will observe a feed id (the last number in the Location line).
 
@@ -26,9 +26,9 @@ Observe the output as in Fig. \ref{fig:create-feed} and you will observe a feed 
   \label{fig:create-feed}
 \end{figure}
 
-Create a JSON file with some dummy data to update to cosm as in listing \ref{code:data-json}.
+Create a JSON file with some dummy data to update to Cosm as in Listing \ref{code:data-json}.
 
-\begin{lstlisting} [caption = {JSON file with data to be uploaded to cosm}, language = sh, label = {code:data-json}, numbers = left, escapeinside={@}{@}]
+\begin{lstlisting} [caption = {JSON file with data to be uploaded to Cosm}, language = sh, label = {code:data-json}, numbers = left, escapeinside={@}{@}]
 {
   "version":"1.0.0",
   "datastreams":[
@@ -39,7 +39,7 @@ Create a JSON file with some dummy data to update to cosm as in listing \ref{cod
 }
 \end{lstlisting}
 
-And now you can update the data to COSM using the curl command.
+And now you can update the data to Cosm using the curl command.
 
 \begin{lstlisting} [caption = {Command to upload data to a feed}, language = sh, label = {code:uploading}, numbers = left, escapeinside={@}{@}]
 curl --request PUT \
@@ -49,7 +49,7 @@ curl --request PUT \
      http://api.cosm.com/v2/feeds/YOUR-FEED-ID
 \end{lstlisting}
 
-And if we look on COSM's web interface, we should be able to see some beautiful plots as in Fig. \ref{fig:plots}
+And if we look on Cosm's web interface, we should be able to see some beautiful plots as in Fig. \ref{fig:plots}
 
 \begin{figure}[htbp]
   \centering
@@ -63,12 +63,12 @@ You can also read data from the command line as exemplified in Fig. \ref{fig:rea
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\linewidth]{figures/reading-cosm.eps}
-  \caption{Reading a COSM feed from the command line}
+  \caption{Reading a Cosm feed from the command line}
   \label{fig:reading-cosm}
 \end{figure}
 
-The next step is to gather information from an XBee and publish it in COSM.
-Use the code detailed in listing \ref{code:XBee2COSM} as a reference.
+The next step is to gather information from an XBee and publish it in Cosm.
+Use the code detailed in Listing \ref{code:XBee2COSM} as a reference.
 
 \begin{lstlisting} [caption = {Command to upload data to a feed}, language = python, label = {code:XBee2COSM}, numbers = left, escapeinside={@}{@}]
 # Derived from code by Alejandro Andreu

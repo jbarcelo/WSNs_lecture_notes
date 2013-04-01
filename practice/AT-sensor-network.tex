@@ -1,8 +1,9 @@
-\chapter{A WSN with XBee's AT mode}
+\chapter{Practice: A WSN with XBee's AT mode}\label{ATSensorNetwork}
+\section*{Suggested read: Chapers~\ref{introToXBee} and~\ref{pract:simpleChat}}
 
-In this assignment we will build a sensor network using the AT (as oposed to the API) mode.
+In this assignment we will build a sensor network using the AT (as opposed to the API) mode.
 This means that we will directly write characters in one end and read them at the other end.
-We can replace any of the two ends by a serial terminal emulation (minicom).
+We can replace any of the two ends by a serial terminal emulation (\emph{\color{blue}{\href{http://en.wikipedia.org/wiki/Minicom}{minicom}}}).
 
 We start by flashing two XBees using X-CTU.
 We will install the AT firmware in them.
@@ -10,7 +11,7 @@ One has to be the coordinator and the other the router.
 
 Then we have to configure the PANID, and the destination address for each of them.
 The configuration can be done using XCTU or the minicom.
-Verify the configuration observing the RSSI LED and then connecting minicom to both XBee and sending information from one XBee to the other as in the chat assignment.
+Verify the configuration observing the RSSI LED and then connecting minicom to both XBee and sending information from one XBee to the other as in the chat assignment (see Chapter~\ref{pract:simpleChat}).
 
 We will use one of the XBees on the solderless breadboard, connected to the Arduino.
 As usual, use the Arduino 3.3V to power the breadboard and connect the serial pins of the XBee to the Arduino.
@@ -47,7 +48,7 @@ void loop()
 
 The other XBee will be connected directly to the computer.
 This will be the sink and will gather the sensed data.
-We will program this part in python using the listing \ref{code:ATWSN-sink} for reference.
+We will program this part in Python using the Listing \ref{code:ATWSN-sink} for reference.
 
 
 \begin{lstlisting} [caption = {Simple code that reads the message that arrive to the XBee in AT mode.}, language = Python, label = {code:ATWSN-sink}, numbers = left, escapeinside={@}{@}]
@@ -94,6 +95,6 @@ For example
 \item Use EWMA or other filters for time average.
 \item Create alarms that use a combination of the data received from different sensors and nodes. 
 For example, if the majority of nodes report light and temperature readings, trigger a fire alarm.
-\item The alarm can be a LED on the arduinos.
+\item The alarm can be a LED on the Arduinos.
 Use broadcast addresses if you want to reach all the nodes in the PANID.
 \end{itemize}

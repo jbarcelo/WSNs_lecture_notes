@@ -1,4 +1,5 @@
-\chapter{Sunset Sensor}
+\chapter{Practice: Sunset Sensor}\label{sunsetSensor}
+\section*{Suggested read: Chaper~\ref{ATSensorNetwork}}
 
 In this lab assignment you will create a sunset detector using a light-dependant resistor (LDR).
 If there is plenty of light, it means than the Sun is high in the sky.
@@ -43,7 +44,7 @@ Check which is the received value and if it is in the range of interest (interme
 
 \section{Configuration}
 Use X-CTU to configure your XBees.
-One of them must be configured as a router (e.g., router AT 22A7 at the time of writing)a and the other as a coordinator API (e.g., coordinator API 21A7 at the time of writing).
+One of them must be configured as a router (e.g., router AT 22A7 at the time of writing) and the other as a coordinator API (e.g., coordinator API 21A7 at the time of writing).
 
 For the router, configure the PANID, the destination address (both high and low), enable channel verification (Networking $\rightarrow$  JV), set D0 to analog (I/O settings $\rightarrow$  D0 $\rightarrow$  ADC) and set the sampling rate to 128 ms (I/O settings $\rightarrow$  I/O sampling $\rightarrow$  IR - I/O sampling rate $\rightarrow$  FF).
 
@@ -63,8 +64,6 @@ The input to the XBee is precisely the connection between the LDR and the resist
 Make sure that the RSSI LEDs of the explorer are on, which means that both of them are in the same network.
 Note that we are using the series communication pins to pass information from the XBee to the Arduino.
 This wires need to be removed to program the Arduino, as the programming process also uses the serial communication port.
-
-
 
 \begin{figure}[htbp]
   \centering
