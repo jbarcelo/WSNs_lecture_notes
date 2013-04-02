@@ -10,20 +10,42 @@ The command to invoke X-CTU will be something similar to
 
 \texttt{wine .wine/drive\_c/Program{\textbackslash} Files/Digi/XCTU/X-CTU.exe}
 
-Then set the port as in Fig. \ref{fig:set-port} and test that you can connect to the XBee using the ``Test/Query'' button as in Fig.~\ref{fig:test-xtu}.
+Then set the port as in Fig. \ref{fig:set-port} and test that you can connect to the XBee using the ``Test/Query'' button as in Fig.~\ref{fig:test-xctu}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.3\linewidth]{figures/set-port.eps}
-  \caption{LDR}
+  \caption{Setting the port.}
   \label{fig:set-port}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.3\linewidth]{figures/test-xctu.eps}
-  \caption{LDR}
+  \caption{Testing communication with the XBee.}
   \label{fig:test-xctu}
 \end{figure}
 
+Now we switch to the ``Modem Configuration'' tag.
+We will flash the XBee with an ``end device'' firmware.
+Only end devices can sleep.
+Routers and coordinators must be always up.
+We choose, for example, the firmware ``zigbee end device at'' in the ``Function set'' drop down menu.
+And we write the firmware to the XBee.
+
+Let's also clean all previous configuration.
+Click the ``restore'' and ``read'' buttons to restore settings to defaults.
+You should obtain something similar to Fig. \ref{fig:clean-28a7}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.3\linewidth]{figures/clean-28a7.eps}
+  \caption{Clean 28a7}
+  \label{fig:clean-28a7}
+\end{figure}
+
+Let's prepare the new configuration.
+Set the PAN ID to your group ID.
+Set D0 to analog (2).
+Set the sampling rate to 255 ms (IR=FF).
 Repeat the lab assignment ``collecting data in a computer'' but this time the sensors will be awake for 1 second and then sleep for 10 seconds.
 While the sensor is awake, it will send a sample every 100ms.
