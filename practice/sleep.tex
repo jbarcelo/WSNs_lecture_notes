@@ -38,7 +38,7 @@ You should obtain something similar to Fig. \ref{fig:clean-28a7}.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.3\linewidth]{figures/clean-28a7.eps}
+  \includegraphics[width=0.3\linewidth]{figures/clean-28a7}
   \caption{Clean 28a7}
   \label{fig:clean-28a7}
 \end{figure}
@@ -47,5 +47,34 @@ Let's prepare the new configuration.
 Set the PAN ID to your group ID.
 Set D0 to analog (2).
 Set the sampling rate to 255 ms (IR=FF).
+We write the changes to the XBee.
+The configuration should look as shown in Fig. \ref{fig:configured-end-device}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.3\linewidth]{figures/configured-end-device}
+  \caption{Configured end device. D0 set to 2 and IR set to FF.}
+  \label{fig:configured-end-device}
+\end{figure}
+
+Now we need to configure the coordinator just as we configured it for 
+Chapter \ref{cha:sink-in-server}.
+We write a coordinator API firmware and restore to factory defaults.
+
+We set the PAN ID.
+We set the AP to 2.
+And we write the configuration.
+
+Now run the python program to read incoming data, and we will see as our screens fills with the received data, as in Fig. \ref{fig:received-data}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.3\linewidth]{figures/received-data}
+  \caption{Data received by the XBee connected to the computer.}
+  \label{fig:received-data}
+\end{figure}
+
+
 Repeat the lab assignment ``collecting data in a computer'' but this time the sensors will be awake for 1 second and then sleep for 10 seconds.
 While the sensor is awake, it will send a sample every 100ms.
+
