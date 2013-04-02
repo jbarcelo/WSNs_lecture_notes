@@ -46,14 +46,14 @@ You should obtain something similar to Fig. \ref{fig:clean-28a7}.
 Let's prepare the new configuration.
 Set the PAN ID to your group ID.
 Set D0 to analog (2).
-Set the sampling rate to 255 ms (IR=FF).
+Set the sampling rate to 255 ms (IR=1FF).
 We write the changes to the XBee.
 The configuration should look as shown in Fig. \ref{fig:configured-end-device}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.3\linewidth]{figures/configured-end-device}
-  \caption{Configured end device. D0 set to 2 and IR set to FF.}
+  \caption{Configured end device. D0 set to 2 and IR set to 1FF.}
   \label{fig:configured-end-device}
 \end{figure}
 
@@ -62,7 +62,6 @@ Chapter \ref{cha:sink-in-server}.
 We write a coordinator API firmware and restore to factory defaults.
 
 We set the PAN ID.
-We set the AP to 2.
 And we write the configuration.
 
 Now run the python program to read incoming data, and we will see as our screens fills with the received data, as in Fig. \ref{fig:received-data}.
@@ -74,6 +73,14 @@ Now run the python program to read incoming data, and we will see as our screens
   \label{fig:received-data}
 \end{figure}
 
+We have not sleep much so far.
+It's time for a nap.
+In the end device, change the ATSM to 5.
+This gives us the possibility of waking up the XBee using the DTR pin.
+Now we change the SP to 200 (default is 20) and we will see that the XBee takes a nap, then sends a few samples, and then takes a nap again.
+Let's set the SP to AAA so that the naps are longer.
+You will observe that the naps are fairly long, so we can use the DTR pin to wake the XBee.
+We can also wake up the XBee for a round of measures by changing the DTR pin from high to low.
 
 Repeat the lab assignment ``collecting data in a computer'' but this time the sensors will be awake for 1 second and then sleep for 10 seconds.
 While the sensor is awake, it will send a sample every 100ms.
