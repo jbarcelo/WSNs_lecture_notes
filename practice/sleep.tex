@@ -85,3 +85,13 @@ We can also wake up the XBee for a round of measures by changing the DTR pin fro
 Repeat the lab assignment ``collecting data in a computer'' but this time the sensors will be awake for 1 second and then sleep for 10 seconds.
 While the sensor is awake, it will send a sample every 100ms.
 
+Now we will connect an LED between DIO9 and ground to see when the XBee wakes up.
+Other ways to know when the XBee wakes up are looking at the RSSI led or the CTS flag in the ``terminal'' tab in X-CTU.
+
+Now for a really long sleeping time, set the sleep options (SO) to 4.
+This tells the XBee that, in case of not receiving any packets, it should multiply the sleep time by the value in SN (number of sleep periods).
+Set SN also to 4 and save the settings to multiply by 4 the sleep time.
+
+\section{Next Steps}
+We can try sleeping in an actuator network.
+In this case, we have to set the SP to the parent equal to the longest SP of all the children, to make sure that the parent stores the packets until the children wake up.
