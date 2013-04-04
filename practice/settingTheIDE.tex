@@ -13,7 +13,7 @@ The \emph{Digital IO} pins, as the name suggests can be set to input or output. 
 \section{The Arduino IDE}\label{pract:settingTheIDE:IDE}
 The Arduino Integrated Development Environment (IDE) is the responsible for making your code work in the Arduino board. Without entering in much unnecessary detail, what the IDE does is to translate your code into C language and compile it using \texttt{avr-gcc}, which makes it understandable to the micro-controller. This last step hides away as much as possible the complexities of programming micro-controllers, so you can spend more time thinking on your actual code.
 
-You can download the Arduino IDE~\emph{\color{blue}{\href{http://www.arduino.cc/en/Main/Software}{from here}}}. If you are using \emph{Linux} or \emph{Windows} operating systems, just double click the downloaded file. This will open a folder named \emph{arduino-[version]}, such as \emph{arduino-1.0}. Place the folder wherever you want in your system. On the Mac, just double click the downloaded file, this will open a disk image containing the Arduino application. Drag a drop the application icon to your Applications folder.
+You can download the Arduino IDE~\emph{\color{blue}{\href{http://www.arduino.cc/en/Main/Software}{from here}}}. If you are using \emph{Linux} or \emph{Windows} operating systems, just double click the downloaded file. This will open a folder named \emph{arduino-[version]}, such as \emph{arduino-1.0}. Place the folder wherever you want in your system. For Ubuntu users, a good alternative is to use the \emph{Ubuntu Software Center} when available. On the Mac, just double click the downloaded file, this will open a disk image containing the Arduino application. Drag a drop the application icon to your Applications folder.
 
 Do not open your installed application yet. First you must teach your computer to detect the Arduino hardware through the USB ports.
 
@@ -42,4 +42,4 @@ Once you have identified the COM port number for the Arduino connection, you can
 Now the Arduino IDE can talk with the Arduino board and program it.
 
 \subsection{What's the deal with Linux users?}
-As mentioned before, IDE uses the same USB controllers than Linux. So, in order to effectively detect your Arduino in Linux, simply connect it to your PC, open a Terminal a type \texttt{ls dev/ttyUSB*}. This will display all available ports. Your Arduino serial port will probable be something like \texttt{/dev/ttyUSB0}.
+As mentioned before, IDE uses the same USB controllers than Linux. So, in order to effectively detect your Arduino in Linux, simply connect it to your PC, open a Terminal a type \texttt{ls /dev/tty*}. This will display all available ports. Your Arduino serial port will probably be something like \texttt{/dev/ttyUSB0} or \texttt{/dev/ttyACM0}, but you can be sure by typing \texttt{dmesg} in the Terminal and looking at the line that details the last connected USB device to a determined \texttt{/dev/tty*} port.
