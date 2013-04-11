@@ -25,6 +25,7 @@ Applications include domotics and wireless sensor and actuator networks.
 \item ZigBee Co-ordinator: It is the most powerful device. There is a single coordinator in each network.
 It is the node that creates the network and the other nodes simply join.
 Quite often, this is the sink of the wireless sensor network that gathers all the data that is transmitted.
+One of the co-ordination tasks is to assign short addresses as will be explained in the next subsection.
 \item ZigBee Router: Routers are intermediate devices.
 They can relay packets for other nodes.
 They join a network that already exists and then announce it using beacons.
@@ -33,6 +34,43 @@ Therefore, they can have ``children'', nodes that join the network by establishi
 These are the simplest devices.
 They cannot forward packets; they cannot have children that depend on them and quite often they sleep to save energy.
 \end{itemize}
+
+\subsection{Network layer and addressing}
+
+Addressing follows a hierarchical scheme that is explained in detail in \cite{baronti2007wsn}.
+An example is provided in Fig. \ref{fig:hierarchical_addressing}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.4\linewidth]{figures/hierarchical_addressing.eps}
+  \caption{Hierarchical address scheme in ZigBee (picture from \cite{baronti2007wsn})}
+  \label{fig:hierarchical_addressing}
+\end{figure}
+
+The hierarchical scheme is appropriate for tree topologies and tree routing.
+Three different topologies are supported in ZigBee: Star, tree and mesh.
+They are shown in Fig. \ref{fig:zigbee-topologies}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/zigbee-topologies.eps}
+  \caption{Supported topologies in ZigBee (picture from \cite{baronti2007wsn})}
+  \label{fig:zigbee-topologies}
+\end{figure}
+
+The mesh topology requires a routing protocol and storing routing tables. 
+It is very resource consuming and a device might not have the resources to execute it.
+If a device does not have resources to launch a route discovery, it reverts to tree routing, which uses a trivial routing algorithm.
+The flow chart is shown in Fig. \ref{fig:zigbee-flowchart}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/zigbee-flowchart.eps}
+  \caption{Routing a packet in ZigBee (picture from \cite{baronti2007wsn})}
+  \label{fig:zigbee-flowchart}
+\end{figure}
+
+
 
 \section{The XBee module hardware configuration}\label{xbee:hardware}
 
