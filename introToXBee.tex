@@ -1,9 +1,38 @@
 \chapter{Introduction to XBee}\label{introToXBee}
 
+
 One of the main characteristics of WSNs is the ability each node has to wirelessly communicate with other nodes. 
 During this course we will be doing this with ZigBee protocol compliant radios, like XBee~\cite{faludi2010bws}.
 
 Throughout this section you will be introduced to the different components and code that will allow you to set a basic wireless network with XBee modules.
+
+\section{The Zigbee and IEEE 802.15.4 standards}
+
+XBee is a Zigbee compliant hardware.
+Zigbee is a specification that is build on top of IEEE 802.15.4.
+Zigbee covers the upper layers of the protocol stack while IEEE 802.15.4 covers the lower layers (MAC and PHY).
+
+ZigBee is intended for low-throughput, low-power, low-cost applications.For this reason, it is much simpler than other protocols such as WiFi (IEEE 802.11).
+It has support for mesh topologies, which means that ZigBee devices relay messages for each other through multiple wireless hops.
+The name ZigBee comes from the fact that the bees can dance to pass messages to each other, also in a multi-hop fashion.
+
+There are channesl in the 868 MHz, 915 MHz and 2.4 GHz ISM bands and the speed is up to 250 kbps in the 2.4 GHz band.
+
+Applications include domotics and wireless sensor and actuator networks.
+
+\subsection{ZigBee profiles}
+\begin{itemize}
+\item ZigBee Co-ordinator: It is the most powerful device. There is a single coordinator in each network.
+It is the node that creates the network and the other nodes simply join.
+Quite often, this is the sink of the wireless sensor network that gathers all the data that is transmitted.
+\item ZigBee Router: Routers are intermediate devices.
+They can relay packets for other nodes.
+They join a network that already exists and then announce it using beacons.
+Therefore, they can have ``children'', nodes that join the network by establishing communication with the router.
+\item End Devices:
+These are the simplest devices.
+They cannot forward packets; they cannot have children that depend on them and quite often they sleep to save energy.
+\end{itemize}
 
 \section{The XBee module hardware configuration}\label{xbee:hardware}
 
@@ -138,7 +167,7 @@ All AT commands start with the \texttt{AT} prefix (accounting for \emph{attentio
 \begin{itemize}
 	\item \texttt{AT}: gets the attention of the XBee. Its normal output is \texttt{OK}. If you do not receive this output,  you've probably timed out of command mode and need to reissue the \texttt{+++} command to get back in it.
 	\item \texttt{ATID}: without any parameter it shows the current Personal Area Network ID (PAN ID) that is assigned to the radio. You can set a PAN ID passing an hexadecimal number in the range $0$x$0$-$0$xFFFF as a parameter.
-	\item \texttt{ATSH/ATDL}: it shows the \emph{high} or \emph{low} parts of the unique XBee $64$-bit serial number, respectively. This number cannot be changed, so passing a parameter will produce an \texttt{ERROR} response.
+	\item \texttt{ATSH/ATSL}: it shows the \emph{high} or \emph{low} parts of the unique XBee $64$-bit serial number, respectively. This number cannot be changed, so passing a parameter will produce an \texttt{ERROR} response.
 	\item \texttt{ATDH/ATDL}: it shows the \emph{high} or \emph{low} parts of the \underline{destination} address the local radio will forward messages to, respectively. Putting address information after \texttt{ATDH} or \texttt{ATDL} will set the \emph{high} or \emph{low} parts of the destination address, accordingly.
 	\item \texttt{ATWR}: saves the current configuration to firmware, so it will become the default configuration the next time you power on the XBee.
 \end{itemize}
