@@ -141,6 +141,15 @@ It is important to notice that once the XBee is placed on the breakout board, th
   \label{fig:xbeeBreakoutBoardPins}}
 \end{figure}
 
+There are some pins that have additional functionalities.
+As an example, the pin labeled DIO5 is also the association pin.
+It is high when the XBee is looking for a network and blinks when it associates to a network (PAN).
+
+The Explorer board also have some useful LEDs.
+The PWR LED tells us that it is powered.
+TX and RX blink when we have serial transmission and reception.
+RSSI lights up for ten seconds after wireless transmission or reception.
+
 Now that the device is properly placed, we need to setup a connection so the current configuration can be reviewed and changed.
 
 \subsubsection{Accessing the firmware}\label{xbeeRoleConfiguration}
@@ -149,7 +158,7 @@ The XBee has a microcontroller running a configurable firmware. This firmware ho
 
 As for now, the official way to update this firmware is through a program called \emph{X-CTU} and can be downloaded for free from the \emph{\color{blue}{\href{http://www.digi.com/support/kbase/kbaseresultdetl?id=2125}{XBee manufacturer's website}}}.
 
-\url{http://www.digi.com/support/productdetail?pid=4549&osvid=0&type=firmware}
+\emph{\color{blue}{\href{http://www.digi.com/support/productdetail?pid=4549&osvid=0&type=firmware}{Firmware updates}}}
 
 X-CTU is only available for the Microsoft Windows operating system, nevertheless you have the virtualization option in OS X, as well as WINE Windows emulator in Linux. 
 If you choose WINE to run X-CTU, it is necessary to add a virtual link in the file system.
