@@ -109,7 +109,20 @@ int BELL = 5;void setup() {
 	}}
 \end{lstlisting}
 
-
+\section{Next Steps}
+\begin{itemize}
+\item The Arduino on the buzzer side can send a confirmation to the Arduino on the push-button side.
+This confirmation means that the initial message has been received and the buzzer is buzzing.
+Include an additional LED on the switch side that lights up when this confirmation is received.
+Now try the doorbell again.
+Confirm that the LED lights up when the button is pushed.
+Finally, disconnect the Arduino on the buzzer side and try to push the button again.
+There should be no sound and no light.
+\item Make a more sophisticated doorbell.
+Include an LED on the buzzer side.
+When the button is pressed, the LED lights up.
+When the button is pressed for longer than one second, the buzzer buzzes.
+\end{itemize}
 
 
 

@@ -45,7 +45,7 @@ As you might be able to see, the code is completely readable. Let's review it li
 	\item Line~\ref{BL:HIGH}: \texttt{digitalWrite(LED, HIGH)} works as a power socket for pins. In this case, the command is indicating to turn pin \texttt{LED} into \texttt{HIGH}, which instructs Arduino to turn the output pin to $5$V. If you have connected a LED in this pin, the result is that it will turn on (hopefully). Turning on and off the pin allow us to see what the software is making the hardware do; the LED is an actuator.
 	\item Line~\ref{BL:DELAY}: \texttt{delay(1000)} tells the processor to wait for $1000$ \emph{milliseconds} before proceeding to the next code line.
 	\item Line~\ref{BL:LOW}: \texttt{digitalWrite(LED, LOW)} as with Line~\ref{BL:HIGH}, this function turns pin \texttt{LED} to $0$V, causing the connected LED to turn off. You can do a mental map in which $HIGH \rightarrow ON,\ LOW \rightarrow OFF$.
-	\item Line~\ref{BL:DELAY2}: because the last instruction was to set the LED off, this will keep it that way for an additional $1000$ \emph{millisecods}.
+	\item Line~\ref{BL:DELAY2}: because the last instruction was to set the LED off, this will keep it that way for an additional $1000$ \emph{milliseconds}.
 \end{itemize}
 
 To see your work, just insert the longer leg of the LED into the digital IO port you assigned to variable \texttt{LED} on your code (digital pin $13$), and the shorter leg to ground (GND). Figure~\ref{fig:blinkingLEDLayout} shows the desired layout.
