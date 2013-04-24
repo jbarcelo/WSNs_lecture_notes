@@ -85,28 +85,40 @@ This code corresponds with the button side of the example.
 {\color{red}{There's a trap!}}: when uploading programs to your Arduino, disconnect the digital pin 0 (RX) and then reconnect it after the loading is completed. Otherwise you will receive an error.
 
 \begin{lstlisting} [caption = {Configuring the Arduino of the buttom side of the example.}, language = C, label = {code:wirelessDoorbellButton}, numbers = left, escapeinside={@}{@}] 
-int BUTTON = 2;void setup() { 
+int BUTTON = 2;
+void setup() { 
 	pinMode(BUTTON, INPUT); 
-	Serial.begin(9600);}void loop() {
+	Serial.begin(9600);
+}
+void loop() {
 // send a capital D over the serial port if the button is pressed
 	if (digitalRead(BUTTON) == HIGH) { 
-		Serial.print('D');		delay(10); // prevents overwhelming the serial port 
-	}}
+		Serial.print('D');
+		delay(10); // prevents overwhelming the serial port 
+	}
+}
 \end{lstlisting}
 
 \subsubsection{The buzzer Arduino}
 This Arduino will receive a signal when the button is pressed and will ring the buzzer.
 
 \begin{lstlisting} [caption = {Configuring the Arduino of the buzzer side of the example.}, language = C, label = {code:wirelessDoorbellBuzzer}, numbers = left, escapeinside={@}{@}]
-int BELL = 5;void setup() { 
+int BELL = 5;
+void setup() { 
 	pinMode(BELL, OUTPUT); 
-	Serial.begin(9600);}void loop() {	// look for a capital D over the serial port and ring the bell if found 
-	if (Serial.available() > 0) {		if (Serial.read() == 'D'){ 
+	Serial.begin(9600);
+}
+void loop() {
+	// look for a capital D over the serial port and ring the bell if found 
+	if (Serial.available() > 0) {
+		if (Serial.read() == 'D'){ 
 		//ring the bell briefly 
-			digitalWrite(BELL, HIGH); 
+			analogWrite(BELL, 180); //ranging from 0-255
 			delay(10); 
-			digitalWrite(BELL, LOW);		}		 
-	}}
+			analogWrite(BELL, 0);
+		}		 
+	}
+}
 \end{lstlisting}
 
 \section{Next Steps}
