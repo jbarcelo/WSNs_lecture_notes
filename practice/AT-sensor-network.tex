@@ -106,3 +106,75 @@ For example, if the majority of nodes report light and temperature readings, tri
 \item The alarm can be an LED on the Arduinos.
 Use broadcast addresses if you want to reach all the nodes in the PANID.
 \end{itemize}
+
+\subsection*{Plotting data in real time}
+Is not a rare case wanting to plot sensor data in real time. The following code is a modified version of the one shown in Listing~\ref{code:ATWSN-sink}.
+
+\begin{lstlisting} [caption = {Code that grabs the data from the XBee and writes it in a file.}, language = Python, label = {code:ATWSN-sink-toFile}, numbers = left, escapeinside={@}{@}]
+# Derived from code by Alejandro Andreu
+import serial
+import time
+import sys
+import shlex
+from time import gmtime, strftime
+
+print 'Receiving data in transparent mode'
+
+def main():
+    if len(sys.argv) is 1:
+        print 'You must provide the path to the serial port as an argument, for instance: "python <code.py> /dev/ttyUSB0".'
+        sys.exit()
+    portname = sys.argv[1]
+    try:
+        with open(portname) as f: pass
+    except IOError as e:
+        print e, '\n'
+        sys.exit()
+
+    s = serial.Serial(portname, 9600)
+
+    print 'Opened'
+
+    while 1:
+        f=open("log.txt","a")
+        received = s.readline()
+        print "Received at: ", strftime("%d-%m-%Y %H:%M:%S",gmtime()),": ", received
+        splitted = shlex.split(received)
+        for i in range(len(splitted)):
+            if(splitted[i] == 'T'):
+                seconds = int(strftime("%H",gmtime()))*3600 + int(strftime("%M",gmtime()))*60 + int(strftime("%S",gmtime()))
+                f.write('{0} {1}\n'.format(seconds,splitted[i+1]))
+                #f.write(seconds, ' ' , splitted[i+1]+'\n')
+        f.close()
+        time.sleep(1)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+The code shown above writes the incoming data in a file called \texttt{log.txt} with the following format: \texttt{<seconds> <data>}. This way we can use any plotting software - like GNUPlot - to read and plot the incoming data.
+
+If this is your first time using GNUPlot, do not worry. Just grab the following code and write it in a \texttt{<whateverName>.gp} file.
+
+\begin{lstlisting} [caption = {GNUPlot file for plotting real-time data.}, language = GNUPlot, label = {code:ATWSN-sink-gnuplot}, numbers = left, escapeinside={@}{@}]
+set xrange[*:*]
+set yrange[*:*]
+set xlabel "Time"
+set ylabel "Sensor data"
+plot "log.txt" u 1:2 title "Temperature" with l ls 1 lw 2
+pause 1
+replot
+reread
+\end{lstlisting}
+
+Listing~\ref{code:ATWSN-sink-gnuplot} is a script that can be executed issuing the following command: \texttt{gnuplot <nameOfTheScript>.gp}.
+
+Execute both scripts in different terminal windows, Listing~\ref{code:ATWSN-sink-toFile} will receive and write the data in a file, while Listing~\ref{code:ATWSN-sink-gnuplot} plots it in real time.
+
+\subsubsection{Further steps}
+\begin{itemize}
+ \item Try playing with GNUPlot parameters to make your figures easier to read.
+ \item Try to modify the temperature (touching the sensor) and see how the plot also changes.
+ \item Note that in the Python code we read the received data until a \texttt{T} is detected. This letter was sent to inform that the following characters are coming from the temperature sensor. Try to incorporate more sensors and build your \emph{protocol} appropriately so the new sensor data can be written to a file.
+ \item Can you plot multiple sensors in real time?
+\end{itemize}
