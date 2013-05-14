@@ -44,11 +44,13 @@ Check which is the received value and if it is in the range of interest (interme
 
 \section{Configuration}
 Use X-CTU to configure your XBees.
-One of them must be configured as a router (e.g., router AT 22A7 at the time of writing) and the other as a coordinator API (e.g., coordinator API 21A7 at the time of writing).
+One of them must be configured as a router (e.g., router AT 22A7 at the time of writing) and the other as a coordinator {\bfseries API} (e.g., coordinator API 21A7 at the time of writing).
 
 For the router, configure the PANID, the destination address (both high and low), enable channel verification (Networking $\rightarrow$  JV), set D0 to analog (I/O settings $\rightarrow$  D0 $\rightarrow$  ADC) and set the sampling rate to 128 ms (I/O settings $\rightarrow$  I/O sampling $\rightarrow$  IR - I/O sampling rate $\rightarrow$  FF).
 
 For the coordinator, you just have to configure the PANID and the destination's address.
+
+As you might have noticed, the router XBee is the one reading the values from the LDR (specifically at pin D0); while the coordinator XBee is the one connected to the processing board (Arduino).
 
 \section{Connections}
 
@@ -67,7 +69,7 @@ This wires need to be removed to program the Arduino, as the programming process
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\linewidth]{figures/sunset_sensor.eps}
+  \includegraphics[width=0.9\linewidth]{figures/sunset_sensor_fixed.eps}
   \caption{Sunset sensor connections}
   \label{fig:sunset_sensor}
 \end{figure}
@@ -86,9 +88,9 @@ This LED blinks when Arduino reads data from the XBee.
 // "Building Wireless Sensor Networks"
 // Check the original for further explanations
 
-int LED_NIGHT = 10;
+int LED_NIGHT = 12;
 int LED_SUNSET = 11;
-int LED_DAY = 12;
+int LED_DAY = 10;
 int debugLED = 13;
 int analogValue = 0;
 
