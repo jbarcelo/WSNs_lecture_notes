@@ -156,40 +156,37 @@ Listing~\ref{code:LEDatXBee}, provides a way of building a packet in the correct
 // This code is partially derived from Robert Faludi's book
 // "Building Wireless Sensor Networks"
 
-void setRemoteState(char value){
-  Serial.print(0x7E); //start byte
-  Serial.print((byte)0x0); //high part of length, always zero.
-  Serial.print(0x10); //The number of bytes that follow. 16 in this case without the checksum.
-  Serial.print(0x17); //remote AT command
-  Serial.print((byte)0x0); //frame id set to zero for no reply
-  
-  //What follow are the address of the destination node.
-  Serial.print((byte)0x0);
-  Serial.print((byte)0x0);
-  Serial.print((byte)0x0);
-  Serial.print((byte)0x0);
-  Serial.print((byte)0x0);
-  Serial.print((byte)0x0);
-  Serial.print(0xFF);
-  Serial.print(0xFF);
 
-  //16 bit of recipient of 0xFFFE if unknown
-  Serial.print(0xFF);
-  Serial.print(0xFE);
-  Serial.print(0x02); //to apply changes on remote
-  
-  //Command name in ASCII characters
-  Serial.print('D');
-  Serial.print('1');
-  
-  //command data in as many butes as needed
-  Serial.print(value);
-  
-  //The checksum contains all bytes after length bytes
-  long sum = 0x17 + 0xFF + 0xFF + 0xFF + 0xFE + 0x02 + 'D' + '1' + value;
-  
-  Serial.print(0xFF - (sum & 0xFF));
-  delay(10);
+void setRemoteState(char value) {
+Serial.write(0x7e);//Start byte
+Serial.write((byte)0x0);//Length
+Serial.write(0x10);//Length High
+Serial.write(0x17);//AT Command Request
+Serial.write((byte)0x0);//Frame ID
+Serial.write((byte)0x0);//Serial Number of Destination
+Serial.write((byte)0x0);
+Serial.write((byte)0x0);
+Serial.write((byte)0x0);
+Serial.write((byte)0x0);
+Serial.write((byte)0x0);
+Serial.write(0xFF);
+Serial.write(0xFF);//End of Serial Number of Destinition
+
+// 16 bit of recipient or 0xFFFE
+Serial.write(0xFF);
+Serial.write(0xFE);
+Serial.write(0x02);//Apply changes immediately
+
+//Command name in ASCII charactors
+Serial.write('D');
+Serial.write('1');
+
+//command data in as many bytes after length bytes
+Serial.write(value);
+
+//checksum is all bytes after length bytes
+long sum = 0x17 + 0xFF+ 0xFF + 0xFF + 0xFE + 0x02 + 'D' + '1' + value;
+Serial.write (0xFF - ( sum & 0xFF) );
 }
 
 \end{lstlisting}
