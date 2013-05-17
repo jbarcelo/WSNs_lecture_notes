@@ -69,7 +69,7 @@ This wires need to be removed to program the Arduino, as the programming process
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\linewidth]{figures/sunset_sensor_fixed.eps}
+  \includegraphics[width=0.9\linewidth]{figures/sunset_detector_fixedFINAL.eps}
   \caption{Sunset sensor connections}
   \label{fig:sunset_sensor}
 \end{figure}
@@ -149,3 +149,47 @@ void loop() {
 
 If you are willing to do more complicated stuff, try to move the alarm to the sensor board. 
 Now the sensor board receives the data, sends it to the processing board for processing, and waits for an instruction from the processing board to ring or light the alarm.
+
+Listing~\ref{code:LEDatXBee}, provides a way of building a packet in the correct format for the recipient AT XBee to change the state of one of its legs.
+
+\begin{lstlisting} [caption = {Change the state of a pin at a remote XBee}, language = C, label = {code:LEDatXBee}, numbers = left, escapeinside={@}{@}]
+// This code is partially derived from Robert Faludi's book
+// "Building Wireless Sensor Networks"
+
+void setRemoteState(char value){
+  Serial.print(0x7E); //start byte
+  Serial.print((byte)0x0); //high part of length, always zero.
+  Serial.print(0x10); //The number of bytes that follow. 16 in this case without the checksum.
+  Serial.print(0x17); //remote AT command
+  Serial.print((byte)0x0); //frame id set to zero for no reply
+  
+  //What follow are the address of the destination node.
+  Serial.print((byte)0x0);
+  Serial.print((byte)0x0);
+  Serial.print((byte)0x0);
+  Serial.print((byte)0x0);
+  Serial.print((byte)0x0);
+  Serial.print((byte)0x0);
+  Serial.print(0xFF);
+  Serial.print(0xFF);
+
+  //16 bit of recipient of 0xFFFE if unknown
+  Serial.print(0xFF);
+  Serial.print(0xFE);
+  Serial.print(0x02); //to apply changes on remote
+  
+  //Command name in ASCII characters
+  Serial.print('D');
+  Serial.print('1');
+  
+  //command data in as many butes as needed
+  Serial.print(value);
+  
+  //The checksum contains all bytes after length bytes
+  long sum = 0x17 + 0xFF + 0xFF + 0xFF + 0xFE + 0x02 + 'D' + '1' + value;
+  
+  Serial.print(0xFF - (sum & 0xFF));
+  delay(10);
+}
+
+\end{lstlisting}
