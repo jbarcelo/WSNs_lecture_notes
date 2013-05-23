@@ -148,7 +148,14 @@ void loop() {
 \section{Advanced optional assignment}
 
 If you are willing to do more complicated stuff, try to move the alarm to the sensor board. 
-Now the sensor board receives the data, sends it to the processing board for processing, and waits for an instruction from the processing board to ring or light the alarm.
+Now the sensor board receives the data, sends it to the processing board for processing, and waits for an instruction from the processing board to ring or light the alarm. The schematics can be appreciated in Figure~\ref{fig:sunset_sensor_at_XBee}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/sunset_detector_at_XBee.eps}
+  \caption{Sunset sensor with LED at XBee}
+  \label{fig:sunset_sensor_at_XBee}
+\end{figure}
 
 Listing~\ref{code:LEDatXBee}, provides a way of building a packet in the correct format for the recipient AT XBee to change the state of one of its legs.
 
