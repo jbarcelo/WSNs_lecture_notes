@@ -13,14 +13,14 @@ The command to invoke X-CTU will be something similar to
 Then set the port as in Fig. \ref{fig:set-port} and test that you can connect to the XBee using the ``Test/Query'' button as in Fig.~\ref{fig:test-xctu}.
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.3\linewidth]{figures/set-port.eps}
+  \includegraphics[width=0.5\linewidth]{figures/set-port.eps}
   \caption{Setting the port.}
   \label{fig:set-port}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.3\linewidth]{figures/test-xctu.eps}
+  \includegraphics[width=0.5\linewidth]{figures/test-xctu.eps}
   \caption{Testing communication with the XBee.}
   \label{fig:test-xctu}
 \end{figure}
@@ -38,7 +38,7 @@ You should obtain something similar to Fig. \ref{fig:clean-28a7}.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.3\linewidth]{figures/clean-28a7}
+  \includegraphics[width=0.5\linewidth]{figures/clean-28a7}
   \caption{Clean 28a7}
   \label{fig:clean-28a7}
 \end{figure}
@@ -46,13 +46,13 @@ You should obtain something similar to Fig. \ref{fig:clean-28a7}.
 Let's prepare the new configuration.
 Set the PAN ID to your group ID.
 Set D0 to analog (2).
-Set the sampling rate to 255 ms (IR=1FF).
+Set the sampling rate to 255 ms (IR=FF).
 We write the changes to the XBee.
 The configuration should look as shown in Fig. \ref{fig:configured-end-device}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.3\linewidth]{figures/configured-end-device}
+  \includegraphics[width=0.5\linewidth]{figures/configured-end-device}
   \caption{Configured end device. D0 set to 2 and IR set to 1FF.}
   \label{fig:configured-end-device}
 \end{figure}
@@ -64,31 +64,32 @@ We write a coordinator API firmware and restore to factory defaults.
 We set the PAN ID.
 And we write the configuration.
 
-Now run the python program to read incoming data, and we will see as our screens fills with the received data, as in Fig. \ref{fig:received-data}.
+Now run the Python program to read incoming data, and we will see as our screens fills with the received data, as in Fig. \ref{fig:sink_in_server_screenshot_first_test}.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.3\linewidth]{figures/received-data}
-  \caption{Data received by the XBee connected to the computer.}
-  \label{fig:received-data}
-\end{figure}
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{figures/received-data}
+%   \caption{Data received by the XBee connected to the computer.}
+%   \label{fig:received-data}
+% \end{figure}
 
-We have not sleep much so far.
+We have not slept much so far.
 It's time for a nap.
-In the end device, change the ATSM to 5.
+In the end device, change the \emph{Sleep Mode} (ATSM) to 5.
 This gives us the possibility of waking up the XBee using the DTR pin.
-Now we change the SP to 200 (default is 20) and we will see that the XBee takes a nap, then sends a few samples, and then takes a nap again.
+
+Now we change the \emph{Sleep Period} (SP) to 200 (default is 20) and we will see that the XBee takes a nap, then sends a few samples, and then takes a nap again.
 Let's set the SP to AAA so that the naps are longer.
 You will observe that the naps are fairly long, so we can use the DTR pin to wake the XBee.
 We can also wake up the XBee for a round of measures by changing the DTR pin from high to low.
 
-Repeat the lab assignment ``collecting data in a computer'' but this time the sensors will be awake for 1 second and then sleep for 10 seconds.
+Repeat the lab assignment ``Collecting data in a Computer'' (found in Chapter~\ref{cha:sink-in-server}) but this time the sensors will be awake for 1 second and then sleep for 10 seconds.
 While the sensor is awake, it will send a sample every 100ms.
 
 Now we will connect an LED between DIO9 and ground to see when the XBee wakes up.
 Other ways to know when the XBee wakes up are looking at the RSSI led or the CTS flag in the ``terminal'' tab in X-CTU.
 
-Now for a really long sleeping time, set the sleep options (SO) to 4.
+Now for a really long sleeping time, set the \emph{Sleep Options} (SO) to 4.
 This tells the XBee that, in case of not receiving any packets, it should multiply the sleep time by the value in SN (number of sleep periods).
 Set SN also to 4 and save the settings to multiply by 4 the sleep time.
 
