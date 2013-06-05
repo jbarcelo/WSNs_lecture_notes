@@ -1,22 +1,22 @@
 \chapter{Practice: Sensor Ping}
 \section*{Suggested read: Chapers~\ref{introToXBee} and~\ref{pract:simpleChat}}
 
-In this assignment we will implement a ``ping'' over the sensor network.
+In this assignment we will implement a ``ping'' over the sensor network. We will use a script in Python to send a probe packet to a remote XBee.
 
-We will use a script in Python to send a probe packet to a remote XBee.
 Time is measured between the submission of the packet and the reception of the acknowledgement; then we present the information on the screen to the user.
 
-To make things more interesting, we connect an Arduino to the remote XBee which flashes a LED each time it receives a packet.
+To make things more interesting, we connect an Arduino to the remote XBee which flashes an LED each time it receives a packet.
 The number of times that the LED has to be flashed is included in the probe packet.
 
 We will start by using X-CTU to flash one of the XBees as a {\bfseries coordinator API} and the other as {\bfseries router API}.
+
 To prevent interference with other groups, write the PAN ID that you are going to use on the blackboard and make sure that you use a PAN ID different from other groups.
 
 The other XBee should be configured as a Router with the same PAN ID.
 
 It is important to set the API mode to 2 as shown in Fig. \ref{fig:ap2} for the two XBees.
 
-Note that in the computer we are using the ``xbee'' library, which can be downloaded from the link provided in Chapter~\ref{cha:sink-in-server}.
+Note that in the computer we are using the ``\texttt{xbee}'' library, which can be downloaded from the link provided in Chapter~\ref{cha:sink-in-server}.
 
 
 \begin{figure}[htbp]
