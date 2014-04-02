@@ -12,27 +12,27 @@ XBee is a Zigbee compliant hardware.
 Zigbee is a specification that is build on top of IEEE 802.15.4.
 Zigbee covers the upper layers of the protocol stack while IEEE 802.15.4 covers the lower layers (MAC and PHY).
 
-ZigBee is intended for low-throughput, low-power, low-cost applications.For this reason, it is much simpler than other protocols such as WiFi (IEEE 802.11).
+ZigBee is intended for low-throughput, low-power, low-cost applications. For this reason, it is much simpler than other protocols such as WiFi (IEEE 802.11).
 It has support for mesh topologies, which means that ZigBee devices relay messages for each other through multiple wireless hops.
 The name ZigBee comes from the fact that the bees can dance to pass messages to each other, also in a multi-hop fashion.
 
-There are channesl in the 868 MHz, 915 MHz and 2.4 GHz ISM bands and the speed is up to 250 kbps in the 2.4 GHz band.
+There are channels in the 868 MHz, 915 MHz and 2.4 GHz ISM bands and the speed is up to 250 kbps in the 2.4 GHz band.
 
 Applications include domotics and wireless sensor and actuator networks.
 
 \subsection{ZigBee profiles}
 \begin{itemize}
-\item ZigBee Co-ordinator: It is the most powerful device. There is a single coordinator in each network.
-It is the node that creates the network and the other nodes simply join.
-Quite often, this is the sink of the wireless sensor network that gathers all the data that is transmitted.
-One of the co-ordination tasks is to assign short addresses as will be explained in the next subsection.
-\item ZigBee Router: Routers are intermediate devices.
-They can relay packets for other nodes.
-They join a network that already exists and then announce it using beacons.
-Therefore, they can have ``children'', nodes that join the network by establishing communication with the router.
-\item End Devices:
-These are the simplest devices.
-They cannot forward packets; they cannot have children that depend on them and quite often they sleep to save energy.
+	\item ZigBee Co-ordinator: It is the most powerful device. There is a single coordinator in each network.
+	It is the node that creates the network and the other nodes simply join.
+	Quite often, this is the sink of the wireless sensor network that gathers all the data that is transmitted.
+	One of the co-ordination tasks is to assign short addresses as will be explained in the next subsection.
+	\item ZigBee Router: Routers are intermediate devices.
+	They can relay packets for other nodes.
+	They join a network that already exists and then announce it using beacons.
+	Therefore, they can have ``children'': nodes that join the network by establishing communication with the router.
+	\item End Devices:
+	These are the simplest devices.
+	They cannot forward packets; they cannot have children that depend on them and quite often they sleep to save energy.
 \end{itemize}
 
 \subsection{Network layer and addressing}
@@ -70,24 +70,27 @@ The flow chart is shown in Fig. \ref{fig:zigbee-flowchart}.
   \label{fig:zigbee-flowchart}
 \end{figure}
 
-Another router alternative, when the sink is powerful and the other devices not so much, is source routing.
+When the sink is powerful and the other devices not so much, source routing is an alternative.
 In source routing, when the sink sends a packet, it provides the full route that the packet has to follow.
 
 In ZigBee, each node has two different addresses.
-The serial number, or hardware address, which is a 64 bits address that is assigned at manufacturing time and is unique in the world.
-Then there is the network address, which is only 16 bits, that is assigned by the network coordinator and is unique in the network.
+The serial number, or hardware address, which is a 64 bits hexadecimal address that is assigned at manufacturing time and is unique in the world.
+Then there is the network address, which is only 16 bits, that is assigned by the network coordinator and is unique in the network. It also is hexadecimal.
 
-There are some special addresses that are possible to highlight.
-0x0000 0000 0000 0000 means that the destination is the coordinator.
-0x0000 0000 0000 FFFF is for broadcast.
-The short address 0xFFFE is used when the short address is not known or for broadcast.
+There are some special addresses that are possible to highlight:
+\begin{itemize}
+	\item 0x0000 0000 0000 0000 means that the destination is the coordinator.
+	\item 0x0000 0000 0000 FFFF is for broadcast.
+	\item The short address 0xFFFE is used when the short address is not known or for broadcast.
+\end{itemize}
 
 When the short address is not known, the first step is an address resolution (from long address to short address).
 
-Each network is identified by a ``Personal Area Network Identifier'' or PANId.
+Each network is identified by a ``Personal Area Network Identifier'' or PAN Id.
 When we configure a network, we must ensure that all the devices are configured with the same PAN Id. 
+
 And also be very careful in assigning different PAN Ids to different networks.
-Specially in a classroom situation, if two teams use the same PAN Id, unexpected results may happen.
+Specially in a classroom situation, if two teams use the same PAN Id, unexpected things may happen.
 
 
 \section{The XBee module hardware configuration}\label{xbee:hardware}
@@ -110,7 +113,7 @@ If you flip the XBee, you will be able to see the pins through which it can send
 
 \subsubsection{Preparing the XBee for configuration}
 
-We can access and program the XBee through any terminal application and a USB connection. The \emph{breakout board} shown in Figure~\ref{fig:breakoutBoard} allows us to: $1$) plug the XBee into a breadboard, facilitating the wired connections with other components (including the Arduino); as well as the ability to $2$) establish a USB connection to configure the XBee.
+We can access and configure the XBee through any terminal application and a USB connection. The \emph{breakout board} shown in Figure~\ref{fig:breakoutBoard} allows us to: $1$) plug the XBee into a breadboard, facilitating the wired connections with other components (including the Arduino); as well as the ability to $2$) establish a USB connection to configure the XBee.
 
 \begin{figure}[htbp]
   \centering
@@ -158,11 +161,11 @@ The XBee has a microcontroller running a configurable firmware. This firmware ho
 
 As for now, the official way to update this firmware is through a program called \emph{X-CTU} and can be downloaded for free from the \emph{\color{blue}{\href{http://www.digi.com/support/kbase/kbaseresultdetl?id=2125}{XBee manufacturer's website}}}.
 
-\emph{\color{blue}{\href{http://www.digi.com/support/productdetail?pid=4549&osvid=0&type=firmware}{Firmware updates}}}
-
-{\tiny \url{http://www.digi.com/support/productdetail?pid=4549&osvid=0&type=firmware}}
+\emph{\color{blue}{\href{http://www.digi.com/support/productdetail?pid=4549&osvid=0&type=firmware}{Firmware updates}}}: \url{http://bit.ly/DigiXCTU}
 
 X-CTU is only available for the Microsoft Windows operating system, nevertheless you have the virtualization option in OS X, as well as WINE Windows emulator in Linux. 
+
+
 If you choose WINE to run X-CTU, it is necessary to add a virtual link in the file system.
 For example, a link from
 
@@ -172,10 +175,20 @@ to
 
 \texttt{/dev/ttyUSB0}
 
-It is also important to know that the user must be added to the \texttt{dialout} group.
-And the firmware for the XBee must be downloaded manually.
-Then use the button ``Download new versions ... '' in the ``Modem Configuration'' tab.
-Then choose ``File'' for the upload source.
+For example, using the following command in a Linux terminal window: 
+
+{\scriptsize{\texttt{ln -s /dev/ttyUSB0 /home/<YourUser>/.wine/dosdevices/COM5}}}.
+
+
+
+It is also important to know that
+
+\begin{itemize}
+	\item Your user must be added to the \texttt{dialout} group.
+	\item The firmware for the XBee must be downloaded manually.
+\end{itemize} 
+
+Use the button ``Download new versions ... '' in the ``Modem Configuration'' tab. Then choose ``File'' for the upload source.
 
 To take a peek at the current XBee configuration: 
 
