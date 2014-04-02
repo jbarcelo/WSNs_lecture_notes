@@ -16,9 +16,9 @@ Trimester: Spring
 
 \section{Introduction}
 The reduction in price and size of computing and wireless communication platforms over the last years opens a new possibility for gathering and processing information: Wireless Sensor Networks.
-A wireless sensor node is an electronic device of small dimensions that gathers measures from the environment and transmit the data wirelessly.
-In wireless sensor nodes, communication is often established with other wireless sensor nodes to exchange or pass information.
-It is common to have this data directed to an special device that gathers all the data and is called the network sink.
+A wireless sensor node is an electronic device of small dimensions that gathers metrics from the environment and transmit the data wirelessly.
+In wireless sensor networks, communication is often established with other wireless sensor nodes to exchange or forward information.
+It is common to have this data directed to a special device that gathers all the data; it is often called the network \emph{sink}.
 As wireless sensor nodes are often battery-powered, energy saving is a relevant issue in these networks.
 
 What follows is an extract of the first pages of \cite{sanabria2012lpw}.
@@ -53,7 +53,7 @@ Because of the variety of measures than can be monitored with these small and (g
   \begin{enumerate}
     \item Introduction to WSNs.
     \item Arduino Platform.
-    \item XBee and XBee explorer. AT commands.
+    \item XBee and XBee Explorer. AT commands.
     \item XBee API mode.
     \item A sensor network with Arduino.
     \item A sensor network without Arduino.
@@ -66,7 +66,7 @@ Because of the variety of measures than can be monitored with these small and (g
     \item Blinking LED (Dimming optional)
     \item Blinking LED with push-button (dimming optional)
     \item XBee chat
-    \item Wireless doorbell
+    \item Sensor and Actuators (Wireless doorbell)
     \item Sunset sensor
     \item Sensor network with Arduino
     \item Sensor network with XBee in API mode
@@ -82,8 +82,11 @@ Most of the lab assignments follow the book that you can find at the university 
 Robert Faludi ``Building Wireless Sensor Networks'' (\cite{faludi2010bws}).
 
 The following list of ``common mistakes'' can be very useful when debugging your projects:
+\begin{itemize}
+	\item \href{http://www.faludi.com/projects/common-xbee-mistakes/}{Common XBee mistakes}:~\url{http://www.faludi.com/projects/common-xbee-mistakes/}.
+	\item \href{https://p2pu.org/en/courses/831/content/1671/}{Hands-on WSN Survival Guide}:~\url{https://p2pu.org/en/courses/831/content/1671/}.
+\end{itemize}
 
-\url{http://www.faludi.com/projects/common-xbee-mistakes/}
 
 Check also:
 
@@ -105,13 +108,20 @@ To pass the course, 50 out of the total 100 points need to be obtained.
 You will work in teams of three people.
 Try to make the groups as heterogeneous as possible: people that are experienced with Arduino and people that are not, people from different majors, people with strong programming skills and people good at electronics, etc.
 
-Each group delivers a single report per session and the teachers may ask questions to individual members of the team.
+	\subsection{Weekly reports}
+	
+	Each group delivers a single report per session and the teachers may ask questions to individual members of the team.
+	We encourage you to use web resources to deliver your reports, for instance: blog posts. This way teachers may provide comments and answer your questions quicker.
+	
+	At the end of each Lab, students are challenged with extended versions of the assignments. If your team accomplish the challenge, your project can be selected to be presented at the Hands-on WSN blogs for the whole community to see.
+
 
 \section{Use your imagination}
 The lab assignments are somewhat easy.
 The goal is that you complement what you do in the lab with other ideas of your own.
 You are encouraged to explore WSNs beyond the basics introduced in the assignments and document your findings in the reports.
-Doing something on your own beyond the assignment takes a lot of effort and is time-consuming.
+
+Going beyond the assignment takes a lot of effort and can be time-consuming.
 Nevertheless, as engineers, we should be able to come up with new ideas and solutions on our own.
 
 \section{Non-stop Arduino}
@@ -124,15 +134,22 @@ We like to receive questions and comments.
 Normally, the best moment to express a doubt is during the class, as it is likely that many people in the class share the same doubt.
 If you feel that you have a question that needs to be discussed privately, we can discuss it right after the class.
 
+Do not despair, we would also like to invite you to our course forum:
+
+\url{http://forum.handsonwsn.org/}
+
+In the forum, we have prepared different topics (hopefully) covering all the stages of the course. Feel free to read through the existing questions, and if what you are looking for is not covered yet, then let us know in an existing thread.
+
 \subsection{Continuous feedback}
 At the end of the lecture, we will ask you to anonymously provide some feedback on the course \emph{\color{blue}{\href{http://bit.ly/10tXjX4}{using a form like this one}}}.
-In particular, I always want to know:
+In particular, we always want to know:
 \begin{itemize}
-\item What is the most interesting thing we have seen in class.
-\item What is the most confusing thing in the class.
+\item What is the most interesting thing we have seen in class?
+\item What is the most confusing thing in the class?
 \item Any other comment you may want to add.
 
-In labs, I will ask each group to hand in a short (few paragraphs) description of the work carried out in class, and the members of the group that have attended the class.
+In labs, I will ask each group to hand in a short (few paragraphs) description of the work carried out in class, and the members of the group that have participated.
+
 Note that this is different from the deliverables, which are the ones that are actually graded.
 \end{itemize}
 
@@ -145,7 +162,7 @@ If this happens, the code will not work as expected.
 If you copy-pasted the code and are experiencing problems, try to type the code.
 
 \subsubsection{4 pin push-button}
-It seems a simple element but correctly placing it on the blackboard and connecting it is not trivial.
+It seems a simple element but correctly placing it on the breadboard and connecting it is not trivial.
 If things are not working and there is a pushbutton involved, ask your instructor.
 
 \subsubsection{Pin-protective foam}
@@ -155,7 +172,7 @@ However, it is important to remove them while you are working with the devices.
 Otherwise, mysterious problems occur.
 
 \subsubsection{Resetting XBee}
-Sometimes XCTU asks you to reset the XBee, or you want to reset it for any other reason (such as to wake it up).
+Sometimes X-CTU asks you to reset the XBee, or you want to reset it for any other reason (such as to wake it up).
 Then, take the XBee out of the Explorer (while the Explorer is connected to the computer) and plug it in again.
 
 \subsubsection{Misterious delays in broadcast mode}
